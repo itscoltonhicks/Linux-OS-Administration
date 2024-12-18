@@ -1,6 +1,8 @@
 # Linux OS Administration
 # Table of Contents
-- [Introduction]
+- [Introduction](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#introduction)
+
+- [Setting Up Our Linux OS Lab Environment](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#Setting-Up-Our-Linux-OS-Lab-Environment)
 # Introduction
 
 Cybersecurity is a subset of IT.
