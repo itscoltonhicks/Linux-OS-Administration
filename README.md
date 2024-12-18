@@ -84,3 +84,97 @@ ssh <username>@<IP Address>
 Provide the password once prompted.
 
 <img width="600" alt="7  ssh into linux" src="https://github.com/user-attachments/assets/62b85504-792d-4729-85b1-6c46c1a3f320" loading="lazy"/>
+
+Now we've accessed our Linux VM. 
+
+The first command we'll do is check for the latest updates for all the software on the system. It ensures our system is running smoothly and securely. 
+
+```
+sudo apt-get update
+```
+
+<img width="597" alt="8  sudo apt-get update" src="https://github.com/user-attachments/assets/e4306351-04ff-4984-bba2-ab972da1e793" loading="lazy"/>
+
+Next we'll install the XFCE desktop environment on our Linux system:
+
+```
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install xfce4
+```
+
+This will take a few minutes to install. We'll see a series of messages that indicate the progress of the installation process.
+
+<img width="800" alt="9  add xfce packages" src="https://github.com/user-attachments/assets/351338a0-4504-413f-81cb-de3b6038c126" loading="lazy"/>
+
+Now we'll install the XFCE session manager on our Linux system. 
+
+The session manager is a crucial part of the XFCE desktop environment. It allows us to manage our desktop sessions—such as logging in, logging out, and saving our settings.
+
+```
+sudo apt install xfce4-session
+```
+
+<img width="800" alt="10  install xfce" src="https://github.com/user-attachments/assets/be6f1853-c637-492c-9d22-623635d611bf" loading="lazy"/>
+
+At this point, we want to install the ```xrdp``` package on our Linux system. 
+
+This basically lets us use Remote Desktop Protocol (RDP) to access our Linux machine.
+
+```
+sudo apt-get -y install xrdp
+```
+
+<img width="800" alt="11  sudo apt-get -y install xrdp" src="https://github.com/user-attachments/assets/834ed010-d254-47e2-8eb2-fbc0f016021d" loading="lazy"/>
+
+Now to make sure the ```xrdp``` service works properly, we want to make sure it's enabled whenever our Linux VM is running. 
+
+This makes our Linux VM ready to be accessed remotely whenever the machine is turned on.
+
+```
+sudo systemctl enable xrdp
+```
+
+<img width="944" alt="12  sudo systemctl enable xrdp" src="https://github.com/user-attachments/assets/0a54de2b-4bdd-452d-b2d1-c42c09ee3eba" loading="lazy"/>
+
+In Ubuntu 20.04, which is the version I'm using, we need to add the ```xrdp``` user to the ```ssl-cert``` group due to the way SSL certificates are handled by default.
+
+This is a specific configuration requirement to allow the ```xrdp``` service to access the necessary SSL certificates for secure connections.
+
+```
+sudo adduser xrdp ssl-cert
+```
+
+<img width="800" alt="13  sudo adduser xrdp ssl-cert" src="https://github.com/user-attachments/assets/5b518904-c3d1-465e-a03c-8b4eeb05fdd2" loading="lazy"/>
+
+Then we'll make sure that every time we connect to our machine via remote desktop, the XFCE desktop environment will be used.
+
+```
+echo xfce4-session >~/.xsession
+```
+
+Finally we'll restart the ```xrdp``` service to apply all the changes we made.
+
+```
+sudo systemctl restart xrdp
+```
+
+<img width="800" alt="14  echo xfce session and system restart" src="https://github.com/user-attachments/assets/9662eed8-828d-439c-b946-e6b669172cbe" loading="lazy"/>
+
+Since we'll start accessing our Linux machine through remote desktop, we need to allow traffic through port 3389.
+
+Port 3389 is the default port for Remote Desktop Protocol (RDP). So I'll go to my Network Security Group (NSG) in Azure and add an inbound port rule. NSGs are basically cloud firewalls in Azure. 
+
+<img width="939" alt="15  inbound port rule for linux vm" src="https://github.com/user-attachments/assets/76b610cf-9e4f-460b-b272-d76a1d25efea" loading="lazy"/>
+
+I misconfigured it the first time by accident, so ignore the "8080Inbound" naming convention for the new rule. Unfortunately we can't change names once it's set.
+
+Now we'll use our Remote Desktop client to access the machine. 
+
+<img width="302" alt="16  rdp" src="https://github.com/user-attachments/assets/f72fb602-c841-4dec-860c-d35d5184964e" loading="lazy"/>
+
+We'll get sent to a login page where we can input our username and password.
+
+<img width="502" alt="17  log into linux vm" src="https://github.com/user-attachments/assets/7c62395a-319f-4ab8-9a0e-9b70fd13480c" loading="lazy"/>
+
+And just like that, we have the XFCE graphical desktop set for our Linux Ubuntu VM.
+
+<img alt="18  xfce view" src="https://github.com/user-attachments/assets/78c7beb5-b7e4-4742-b617-20355e1788a0" loading="lazy"/>
