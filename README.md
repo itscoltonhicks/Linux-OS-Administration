@@ -207,10 +207,6 @@ We can use the ```CTRL+F``` command or ```F3``` in the File Explorer to reveal a
 
 <img width="439" alt="4  Find function in file explorer" src="https://github.com/user-attachments/assets/a7b42d13-df6e-45a9-9794-029484ab5982" loading="lazy"/>
 
-Next select the "Trash" location in the left pane to see where our deleted files go for restoration or permanent deletion.
-
-<img width="438" alt="5  Trash in file explorer" src="https://github.com/user-attachments/assets/0879dca7-abcd-4840-a01b-9778b1e32747" loading="lazy"/>
-
 Close the File Explorer now with the X button at the top right to close the window, again very similar to the Windows OS.
 
 Now navigate to the system settings which can be found along the task bar in ```Applications > Settings > Settings Manager```.
@@ -219,8 +215,52 @@ Now navigate to the system settings which can be found along the task bar in ```
 
 This is where we can change things like display options, backgrounds, notifications, and other system settings.
 
-To wrap up this section, we can look at how to find an application.
+At this point, let's look at how to find an application beyond just using the "Application" dropdown menu. 
 
 We can click the search icon at the bottom of the desktop. A window will pop up, and we can search any application that exists on our system. For instance, I can find the Firefox Web Browser by searching for it.
 
 <img width="786" alt="7  Application finder" src="https://github.com/user-attachments/assets/dc467ff1-89f7-429c-8a93-a6442752fe9a" loading="lazy"/>
+
+It's also important to know how to interact with folders and files on the Linux GUI. 
+
+Open up the "Home" folder and navigate to the "Desktop" folder. Once there, let's right-click the empty space and create a new folder.
+
+<img width="600" alt="8  Create a folder" src="https://github.com/user-attachments/assets/a920393b-bfea-4a67-92a9-a72a403a6418" loading="lazy"/>
+
+A new folder will appear on our desktop view, since the "Desktop" folder is just a representation of what we're seeing on the desktop itself.
+
+<img width="600" alt="9  Creating a TestFolder" src="https://github.com/user-attachments/assets/9433ac26-1d4e-4720-9c3c-596b3c8c531b" loading="lazy"/>
+
+If we right-click the folder and select "Properties," we'll see a couple tabs containing details about the folder.
+
+The "General" tab tells us it's a folder and where it's located on disk.
+
+<img width="609" alt="10  General tab for folders" src="https://github.com/user-attachments/assets/e4c36ec7-e05e-4db1-8453-c0c84abafc95" loading="lazy"/>
+
+The "Emblems" tab allows us to add icons to organize or label our folders. 
+
+<img width="610" alt="11  Emblems tab for folders" src="https://github.com/user-attachments/assets/8335caa0-a3e0-496d-9627-0703db26f5da" loading="lazy"/>
+
+And the "Permissions" tab shows us who has access to the folder, and the level of access provided.
+
+<img width="616" alt="12  Permissions tab for folders" src="https://github.com/user-attachments/assets/c4893659-2735-4f04-bd7a-1cb572bf5ae0" loading="lazy"/>
+
+Next, let's create a file inside our new ```TestFolder```. Go to the directory, right-click the empty space, and create an empty file. 
+
+<img width="600" alt="13  Create file in linux" src="https://github.com/user-attachments/assets/2e6cd8f8-9353-456c-8f72-245d8b996d69" loading="lazy"/>
+
+You'll be prompted to give it a name. I'll name mine ```TestFile```.
+
+We can double-click the file to open it. Add text. And save it.
+
+<img width="550" alt="14  Newly saved test file" src="https://github.com/user-attachments/assets/278f97d1-2a70-4ee6-923a-8caf0641fa91" loading="lazy"/>
+
+Now when we want to delete folders or files, we can right-click it and choose "Move to Trash." 
+
+<img width="550" alt="15  Move folder to trash" src="https://github.com/user-attachments/assets/c9aac3f1-e804-4348-8431-2c8da1cd29e6" loading="lazy"/>
+
+Next select the "Trash" location in the left pane to see where our deleted files go for restoration or permanent deletion.
+
+Then just like in Windows, we can permanently delete folders and files.
+
+<img width="602" alt="16  Delete folders in trash bin" src="https://github.com/user-attachments/assets/d8c01eab-317d-4cd9-92d2-cd5e061f370a" loading="lazy"/>
