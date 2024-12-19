@@ -187,15 +187,11 @@ And just like that, we have the XFCE graphical desktop set for our Linux Ubuntu 
 
 Linux desktop environments vary in their design, features, and customization options.
 
-We'll look at the XFCE variant. The XForms Common Environment is a lightweight software for the graphical desktop. But it's also visually appealing and user friendly.
-
-This makes it a great GUI for our Linux environment.
+We'll look at the XFCE variant. The XForms Common Environment is a lightweight software for the graphical desktop. But it's also visually appealing and user friendly. This makes it a great GUI for our Linux environment.
 
 Start up our Linux workstation.
 
-We'll bring our mouse cursor to the top left of the desktop to the "Applications" dropdown menu along the taskbar.
-
-Notice how this is where we can find applications and other software.
+We'll bring our mouse cursor to the top left of the desktop to the "Applications" dropdown menu along the taskbar. Notice how this is where we can find applications and other software.
 
 <img width="750" alt="1  Applications View" src="https://github.com/user-attachments/assets/4aab30ba-9626-4dad-806e-48d43d462a5c" loading="lazy"/>
 
@@ -203,7 +199,7 @@ Click the "File Manager" option. This is where we can find common folder locatio
 
 <img width="482" alt="2  File Manager" src="https://github.com/user-attachments/assets/6e9539f4-e38a-4536-bba4-d94b71a9bd25" loading="lazy"/>
 
-We can click around the left pane to navigate to different locations. We can also click the "view" tab, then select options to change our view preferences.  
+We can click around the left pane to navigate to different locations. We can also click the "view" tab and select different options to change our view preferences.  
 
 <img width="441" alt="3  Manage file explorer preferences" src="https://github.com/user-attachments/assets/54ec39c8-4163-4f73-92ca-75a63061a991" loading="lazy"/>
 
