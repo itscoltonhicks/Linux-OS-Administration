@@ -180,3 +180,49 @@ We'll get sent to a login page where we can input our username and password.
 And just like that, we have the XFCE graphical desktop set for our Linux Ubuntu VM.
 
 <img alt="18  xfce view" src="https://github.com/user-attachments/assets/78c7beb5-b7e4-4742-b617-20355e1788a0" loading="lazy"/>
+
+# Lab #1: Navigating a Linux GUI
+
+Linux desktop environments vary in their design, features, and customization options.
+
+We'll look at the XFCE variant. The XForms Common Environment is a lightweight software for the graphical desktop. But it's also visually appealing and user friendly.
+
+This makes it a great GUI for our Linux environment.
+
+Start up our Linux workstation.
+
+We'll bring our mouse cursor to the top left of the desktop to the "Applications" dropdown menu along the taskbar.
+
+Notice how this is where we can find applications and other software.
+
+<img width="750" alt="1  Applications View" src="https://github.com/user-attachments/assets/4aab30ba-9626-4dad-806e-48d43d462a5c" loading="lazy"/>
+
+Click the "File Manager" option. This is where we can find common folder locations our user account can access. This is similar to what we've seen with the [Windows OS.](https://github.com/itscoltonhicks/Windows-OS-Administration)
+
+<img width="482" alt="2  File Manager" src="https://github.com/user-attachments/assets/6e9539f4-e38a-4536-bba4-d94b71a9bd25" loading="lazy"/>
+
+We can click around the left pane to navigate to different locations. We can also click the "view" tab, then select options to change our view preferences.  
+
+<img width="441" alt="3  Manage file explorer preferences" src="https://github.com/user-attachments/assets/54ec39c8-4163-4f73-92ca-75a63061a991" loading="lazy"/>
+
+We can use the ```CTRL+F``` command or ```F3``` in the File Explorer to reveal a search function to find files and folders.
+
+<img width="439" alt="4  Find function in file explorer" src="https://github.com/user-attachments/assets/a7b42d13-df6e-45a9-9794-029484ab5982" loading="lazy"/>
+
+Next select the "Trash" location in the left pane to see where our deleted files go for restoration or permanent deletion.
+
+<img width="438" alt="5  Trash in file explorer" src="https://github.com/user-attachments/assets/0879dca7-abcd-4840-a01b-9778b1e32747" loading="lazy"/>
+
+Close the File Explorer now with the X button at the top right to close the window, again very similar to the Windows OS.
+
+Now navigate to the system settings which can be found along the task bar in ```Applications > Settings > Settings Manager```.
+
+<img width="626" alt="6  Settings Manager" src="https://github.com/user-attachments/assets/2d3beb46-270d-4fc4-aa1a-b5853ccdfa14" loading="lazy"/>
+
+This is where we can change things like display options, backgrounds, notifications, and other system settings.
+
+To wrap up this section, we can look at how to find an application.
+
+We can click the search icon at the bottom of the desktop. A window will pop up, and we can search any application that exists on our system. For instance, I can find the Firefox Web Browser by searching for it.
+
+<img width="786" alt="7  Application finder" src="https://github.com/user-attachments/assets/dc467ff1-89f7-429c-8a93-a6442752fe9a" loading="lazy"/>
