@@ -7,6 +7,8 @@
 - [Lab #1: Navigating a Linux GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-1-navigating-a-linux-gui)
 
 - [Lab #2: The File and Folder Structure of a Linux Operating System](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-2-the-file-and-folder-structure-of-a-linux-operating-system)
+
+- [Lab #3: Monitor Running Processes With a Linux GUI]
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -325,3 +327,85 @@ For example, the ```uptime``` file will give us information on the current uptim
 <img width="537" alt="5  uptime file in proc directory" src="https://github.com/user-attachments/assets/d7b8fcaa-ecb1-4f09-b2f5-9c361aa345ba" loading="lazy"/>
 
 Notice a key difference between Linux and Windows. Linux doesn't use a registry like Windows but stores everything in a basic file to be recalled and worked with as needed at any time.
+
+# Lab #3: Monitor Running Processes With Linux GUI Tools
+
+Sometimes a process is slowing things down or causing issues on a system. 
+
+Whenever that happens, we'll want to investigate system processes. This'll allow us to restore systems back to normal use. In this lab, we'll do this with GNOME System Monitor and XFCE Task Manager. 
+
+They're GUI tools that help us monitor running processes on our system. 
+
+To get started, we can find it located under "Systems."
+
+<img width="384" alt="1  Open system monitor" src="https://github.com/user-attachments/assets/12ef1f29-7267-4841-a66f-55fc8ae83d9d" loading="lazy"/>
+
+The System Monitor window will pop up and put us in the "Processes" tab by default.
+
+Here we'll see the many processes currently running on our system and accompanying details—process name, which user is the owner, CPU & memory usage, Process ID, etc.
+
+<img width="567" alt="2  Processes tab in system monitor" src="https://github.com/user-attachments/assets/4453b239-452b-43e6-9058-a6cfc4ac3e80" loading="lazy"/>
+
+Next we can view the "Resources" tab to get a high-level overview of what's going on.
+
+This displays graphical charts representing system resources being used over time. 
+
+<img width="567" alt="3  Resources tab in system monitor" src="https://github.com/user-attachments/assets/991446a9-e2f3-4252-b961-f791296f3939" loading="lazy"/>
+
+Finally, the "File Systems" tab gives us a snapshot of the attached disks and storages in use.
+
+<img width="569" alt="4  File Systems tab in system monitor" src="https://github.com/user-attachments/assets/dd72f3a2-477a-4338-9b83-19a917a4cc0a" loading="lazy"/>
+
+At this point, let's interact with processes through the System Monitor. 
+
+Dock the System Monitor to the right half of the desktop. Now let's open Text Editor to see what happens in the System Monitor. 
+
+We'll see a ```gedit``` process appear.
+
+<img width="900" alt="5  gedit process in system monitor" src="https://github.com/user-attachments/assets/7cca6f86-e18f-48a9-a75c-54e8d318154a" loading="lazy"/>
+
+This is the process name for the text editor. It's important to know that binary executable files have different names under the hood than the name of the application running itself.
+
+If we want to view more details about the process, we can right-click it and select "Properties."
+
+```image```
+
+Now we'll walk through "stopping" and "killing" a process.
+
+Someone may casually say to "stop" a process. And what they're actually saying is to end or kill the task. But technically, stopping a process is just pausing it (kind of like freezing a video). 
+
+We can illustrate that by first right-clicking the ```gedit``` process and selecting "Stop."
+
+Try typing inside the text editor window and notice how nothing appears. 
+
+```image```
+
+That being said, the process is still receiving input.
+
+We can illustrate this by right-clicking the ```gedit``` process again and selecting "Continue." This effectively wakes up the process.
+
+All the character keys we hit while it was stopped will now load and appear into the process.
+
+```image```
+
+We can apply the same principle to ending the task. 
+
+Stop the ```gedit``` process again. Then try to "End Process" or kill it. We'll notice how the text editor stays open
+
+```image```
+
+But when we "continue" the ```gedit``` process, the task will get terminated.
+
+```image```
+
+Understanding how processes work is important for system administrators and security professionals. 
+
+If an application freezes or behaves unexpectedly, pausing or killing a process may resolve the issue. Some processes may consume too much CPU or memory. Knowing how to stop or kill these process helps optimize system performance.
+
+And in the case of a security incident, we can stop or kill harmful processes before it compromises the system further.
+
+Let's wrap up this section by using the XFCE Task Manager tool.
+
+It's a simplified version of System Monitor. But it has a unique feature. Processes will get highlighted different colors based on changes in the system.
+
+Let's illustrate this.
