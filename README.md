@@ -271,7 +271,7 @@ Then just like in Windows, we can permanently delete folders and files.
 
 In Linux, everything is a file. 
 
-So it's worth understanding how the file and folder structure works. And it all starts in the root directory, denoted by the ```/``` character. The root directory is the top-level directory in a Linux filesystem. All other directories branh off from here.
+So it's worth understanding how the file and folder structure works. And it all starts in the root directory, denoted by the ```/``` character. The root directory is the top-level directory in a Linux filesystem. All other directories branch off from here.
 
 We can view the root directory within the file explorer window.
 
@@ -287,9 +287,9 @@ Let's briefly cover some common ones:
 - ```/usr```: Contains user utilities and applications. It holds the majority of the system's software.
 - ```/var```: Contains variable data files like logs, databases, and spool files. This is useful when investigating event logs. 
 - ```/dev```: Contains device files. This provides an interface to interact with hardware devices.
-- ```/home```: Contains personal directories for all users. For example, ```/home/colton``` is my home directory.
+- ```/home```: Contains personal directories for all users. For example, ```/home/Colton``` is my home directory.
 - ```/lib```: Holds essential shared libraries and kernel modules needed to boot the system and run basic commands. These libraries are important for system functionality.
-- ```mnt```: Temporarily mounts filesystems or external devices. It's often used for maintenance tasks. 
+- ```/mnt```: Temporarily mounts filesystems or external devices. It's often used for maintenance tasks. 
 - ```/opt```: Used for installing optional software packages. Software not included by default in the system might be installed here. 
 - ```/proc```: Provides information about system processes. It allows us to look under the hood of our system and see how it's operating.  
 - ```/root```: Home directory for the root user (different from the root directory). This is the folder for the system administrator account and requires privileged access.
