@@ -409,3 +409,27 @@ Let's wrap up this section by using the XFCE Task Manager tool.
 It's a simplified version of System Monitor. But it has a unique feature. Processes will get highlighted different colors based on changes in the system.
 
 Let's illustrate this.
+
+We can find it under ```Applications > ...```.
+
+```image```
+
+The view is similar to System Monitor, yet simplified.
+
+```image```
+
+Now let's open up text editor and see what happens.
+
+```image```
+
+As the new ```gedit``` process started, we see it appear highlighted in green. 
+
+We also the see the ```yellow one``` highlighted as yellow. This is our remote session indicating we're altering something on the system. This helps us understand which processes are linked when changed are made.
+
+Once the Task Manager has stabilized, let's close the text editor.
+
+```image```
+
+Notice how the ```gedit``` process gets highlighted red. 
+
+This shows us that the task is getting terminated, and it'll eventually disappear from the Task Manager view. 
