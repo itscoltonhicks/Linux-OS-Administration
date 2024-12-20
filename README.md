@@ -5,6 +5,8 @@
 - [Setting Up Our Linux OS Lab Environment](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#Setting-Up-Our-Linux-OS-Lab-Environment)
 
 - [Lab #1: Navigating a Linux GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-1-navigating-a-linux-gui)
+
+- [Lab #2: The File and Folder Structure of a Linux Operating System]
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -264,3 +266,62 @@ Next select the "Trash" location in the left pane to see where our deleted files
 Then just like in Windows, we can permanently delete folders and files.
 
 <img width="602" alt="16  Delete folders in trash bin" src="https://github.com/user-attachments/assets/d8c01eab-317d-4cd9-92d2-cd5e061f370a" loading="lazy"/>
+
+# Lab #2: The File and Folder Structure of a Linux Operating System
+
+In Linux, everything is a file. 
+
+So it's worth understanding how the file and folder structure works. And it all starts in the root directory, denoted by the ```/``` character. The root directory is the top-level directory in a Linux filesystem. All other directories branh off from here.
+
+We can view the root directory within the file explorer window.
+
+<img width="539" alt="1  View of linux filesystem" src="https://github.com/user-attachments/assets/d9650776-7eca-4be2-a7e6-e4be90e078e9" loading="lazy"/>
+
+Here we'll see all our directories listed.
+
+Let's briefly cover some common ones:
+
+- ```/bin```: Contains essential user command binaries (or programs). These are basic commands needed to operate the system. 
+- ```/etc```: Stores system-wide configuration files and shell scripts used to boot and initialize the system. Key configuration files like ```/etc/passwd``` and ```/etc/fstab``` are located here.
+- ```/sbin```: Contain essential system binaries. These commands are crucial for system administration.
+- ```/usr```: Contains user utilities and applications. It holds the majority of the system's software.
+- ```/var```: Contains variable data files like logs, databases, and spool files. This is useful when investigating event logs. 
+- ```/dev```: Contains device files. This provides an interface to interact with hardware devices.
+- ```/home```: Contains personal directories for all users. For example, ```/home/colton``` is my home directory.
+- ```/lib```: Holds essential shared libraries and kernel modules needed to boot the system and run basic commands. These libraries are important for system functionality.
+- ```mnt```: Temporarily mounts filesystems or external devices. It's often used for maintenance tasks. 
+- ```/opt```: Used for installing optional software packages. Software not included by default in the system might be installed here. 
+- ```/proc```: Provides information about system processes. It allows us to look under the hood of our system and see how it's operating.  
+- ```/root```: Home directory for the root user (different from the root directory). This is the folder for the system administrator account and requires privileged access.
+
+That's a lot of information.
+
+So let's walk through a few of these in our Linux environment. 
+
+We'll begin in the ```/home``` folder.
+
+If we go down the file system, we'll see the ```Colton``` user. Inside that user's home folder we'll find all the sub-folders nested within it.
+
+<img width="541" alt="2  User home folder" src="https://github.com/user-attachments/assets/58937bbf-b4f8-4ba9-94d4-f33f91803220" loading="lazy"/>
+
+Now let's go back to the root directory by going up the file system.
+
+Notice how the ```/root``` directory has a big "X" on it. 
+
+<img width="540" alt="3  Root user folder" src="https://github.com/user-attachments/assets/2e7d0555-d997-4b3e-b709-6161f6b82205" loading="lazy"/>
+
+This is because it's protected and requires heightened privileges. Remember, this is the home directory for the system administrator.
+
+Finally, let's look at the ```/proc``` folder.
+
+All these folders contain information for a given process with that Process ID (PID).
+
+<img width="540" alt="4  proc folder in linux" src="https://github.com/user-attachments/assets/fd0fe456-186f-4f86-9c2a-54213eb91944" loading="lazy"/>
+
+These files and directories aren't actually on the disk. They only exist in memory. And they're generated dynamically based on what's happening in our system. So they'll start up and disappear as the operating system is in use. 
+
+For example, the ```uptime``` file will give us information on the current uptime on the operating system.
+
+<img width="537" alt="5  uptime file in proc directory" src="https://github.com/user-attachments/assets/d7b8fcaa-ecb1-4f09-b2f5-9c361aa345ba" loading="lazy"/>
+
+Notice a key difference between Linux and Windows. Linux doesn't use a registry like Windows but stores everything in a basic file to be recalled and worked with as needed at any time.
