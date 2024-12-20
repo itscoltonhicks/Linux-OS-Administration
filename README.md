@@ -6,7 +6,7 @@
 
 - [Lab #1: Navigating a Linux GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-1-navigating-a-linux-gui)
 
-- [Lab #2: The File and Folder Structure of a Linux Operating System]
+- [Lab #2: The File and Folder Structure of a Linux Operating System](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-2-the-file-and-folder-structure-of-a-linux-operating-system)
 # Introduction
 
 Cybersecurity is a subset of IT.
