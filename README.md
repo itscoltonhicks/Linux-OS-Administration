@@ -314,7 +314,7 @@ This is because it's protected and requires heightened privileges. Remember, thi
 
 Finally, let's look at the ```/proc``` folder.
 
-All these folders contain information for a given process with that Process ID (PID).
+All these folders contain information for a given process with a Process ID (PID).
 
 <img width="540" alt="4  proc folder in linux" src="https://github.com/user-attachments/assets/fd0fe456-186f-4f86-9c2a-54213eb91944" loading="lazy"/>
 
