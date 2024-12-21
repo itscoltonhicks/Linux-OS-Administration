@@ -509,4 +509,4 @@ Now let's enter the ```exit``` command to terminate one of them.
 
 This is enough to introduce us to the terminal.
 
-From here on out, we'll mostly use the terminal for the rest of the labs.
+For our future labs, we'll mostly use the terminal.
