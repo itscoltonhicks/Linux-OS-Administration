@@ -428,9 +428,48 @@ Once the Task Manager has stabilized, let's close the text editor.
 
 Notice how the ```gedit``` process gets highlighted red. 
 
-This shows us that the task is getting terminated, and it'll eventually disappear from the Task Manager view. 
+This shows us that the task is getting terminated, and it'll eventually disappear from the Task Manager view.
 
-# Lab #4: Operating the Terminal
+# Lab #4: Viewing System Logs With a GUI
+
+System logs in Linux are plain text files that record events, actions, and messages from different parts of our computer. 
+
+These logs are important because they help us:
+
+- **Solve problems:** They help us figure out why something isn't working (e.g. when an application crashes). 
+- **Monitor security:** They reveal suspicious activity.
+- **Track changes:** They show us who made changes to the system and when.
+
+In later section, we'll explore logs in the CLI. 
+
+But for now we'll use the GNOME Logs GUI to get a feel for them. Let's open it up under ```Applications > System > Logs```. A window will pop up displaying logs in four different categories.
+
+<img width="687" alt="1  GNOME Logs gui" src="https://github.com/user-attachments/assets/707a0a78-4af3-4f18-a498-80267c397254" loading="lazy"/>
+
+Here's a brief description of each: 
+
+- **Application Logs**: Records activity fro software applications like web browsers or text editors.
+- **System Logs**: Includes messages from the kernel, boot logs, and background services (daemons). 
+- **Security Logs**: Shows login attempts, authentication failures, firewall activity, and other security-related events.
+- **Hardware Logs**: Monitor events related to hardware like hard drives or memory. 
+
+We can search for logs by clicking the magnifying glass icon at the top.
+
+Let's search for activities related to the ```gedit``` process. We'll see a list of logs. 
+
+Then we can click one to view the details.
+
+<img width="684" alt="2  Gedit process in logs" src="https://github.com/user-attachments/assets/872c457c-1d4d-48b2-82db-6ff2b6bb1b6c" loading="lazy"/>
+
+Here's a quick breakdown of what we're seeing:
+
+- **Sender**: This indicates the source or origin of the log message. In this case, the log comes from the system component ```dbus-daemon```.
+- **Time**: This shows the date and time when the event occurred (and the log created).
+- **Message**: This contains details about the event. For instance, we can see the User ID (UID) and Process ID (PID). We also see that we successfully activated the service.
+- **Audit Session**: This refers to a session that is being monitored for security-related events. The number 2 means this is the second such session recorded.
+- **Priority**: This indicates the severity or importance of the log message. In our example, a priority of 6 tells us that this is an informational message. 
+
+# Lab #5: Operating the Terminal
 
 The terminal is a command line interface in Linux.
 
@@ -448,19 +487,21 @@ In this short lab, we'll get introduced to the terminal.
 
 Open a terminal under Applications. Or we can use the ```Ctrl + Alt + T``` shortcut to open one.
 
-```image```
+<img width="424" alt="1  Linux terminal" src="https://github.com/user-attachments/assets/ed70ce63-c85c-4c0b-a3a1-f53738196fdd" loading="lazy"/>
 
-We can create multiple terminals in separate tabs, similar to having multiple tabs open in a single web browser window.
+We can create multiple terminals in separate tabs, similar to having multiple tabs open in a single web browser window. Just click ```File > New Tab```.
 
-```image```
+<img width="425" alt="2  Two terminal tabs in a single window" src="https://github.com/user-attachments/assets/7058d7a1-5f46-47a4-8771-0204af9ca9a9" loading="lazy"/>
 
-Or we can detach them into separate windows, docking them side-by-side.
+Or we can detach them into separate windows, docking them side-by-side. Just right-click a tab and select "Detach Terminal."
 
-```image```
+<img width="900" alt="3  two docked terminals" src="https://github.com/user-attachments/assets/e72e5126-b94d-4de0-8d43-73b46b715748" loading="lazy"/>
 
-Let's use the ```exit``` command to terminate one of them. 
+Having multiple terminals open is useful when comparing outputs for different commands. 
 
-```image```
+Now let's enter the ```exit``` command to terminate one of them. 
+
+<img width="900" alt="4  exit command" src="https://github.com/user-attachments/assets/61ca1d76-a3c8-4730-96e2-70d9bd33df75" loading="lazy"/>
 
 This is enough to introduce us to the terminal.
 
