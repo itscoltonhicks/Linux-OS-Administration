@@ -362,73 +362,69 @@ Dock the System Monitor to the right half of the desktop. Now let's open Text Ed
 
 We'll see a ```gedit``` process appear.
 
-<img width="900" alt="5  gedit process in system monitor" src="https://github.com/user-attachments/assets/7cca6f86-e18f-48a9-a75c-54e8d318154a" loading="lazy"/>
+<img width="775" alt="5  gedit process in system monitor" src="https://github.com/user-attachments/assets/3b7672b2-c356-40d0-b752-113ca88d3db8" loading="lazy"/>
 
 This is the process name for the text editor. It's important to know that binary executable files have different names under the hood than the name of the application running itself.
 
 If we want to view more details about the process, we can right-click it and select "Properties."
 
-```image```
+<img width="675" alt="6  gedit process properties" src="https://github.com/user-attachments/assets/a2abe271-9800-4f0e-9639-4fb443676cbc" loading="lazy"/>
 
 Now we'll walk through "stopping" and "killing" a process.
 
-Someone may casually say to "stop" a process. And what they're actually saying is to end or kill the task. But technically, stopping a process is just pausing it (kind of like freezing a video). 
+Someone may casually say to "stop" a process. And what they're actually saying is to end or kill the task. But technically, stopping a process is just pausing it (kind of like freezing a video). We can illustrate that by first right-clicking the ```gedit``` process and selecting "Stop."
 
-We can illustrate that by first right-clicking the ```gedit``` process and selecting "Stop."
+A window will pop up asking if we're sure that we want to stop it. Click "Stop Process."
+
+<img width="750" alt="7  stop gedit process" src="https://github.com/user-attachments/assets/3407e972-fa77-4888-a71d-0780a8a4d788" loading="lazy"/>
 
 Try typing inside the text editor window and notice how nothing appears. 
 
-```image```
+That being said, the process is still receiving input. We can illustrate this by right-clicking the ```gedit``` process again and selecting "Continue." This effectively wakes up the process.
 
-That being said, the process is still receiving input.
-
-We can illustrate this by right-clicking the ```gedit``` process again and selecting "Continue." This effectively wakes up the process.
+<img width="750" alt="8  continue gedit process" src="https://github.com/user-attachments/assets/630f9067-f8db-420c-8810-62ebfe93eb65" loading="lazy"/>
 
 All the character keys we hit while it was stopped will now load and appear into the process.
 
-```image```
+<img width="800" alt="9  secret text appears for gedit process" src="https://github.com/user-attachments/assets/30623327-7c40-47b8-b5f2-4b0a86147211" loading="lazy"/>
 
 We can apply the same principle to ending the task. 
 
-Stop the ```gedit``` process again. Then try to "End Process" or kill it. We'll notice how the text editor stays open
+Stop the ```gedit``` process again. Then try to "End Process" or kill it. 
 
-```image```
+<img width="650" alt="10  End process" src="https://github.com/user-attachments/assets/7a9e11bc-1263-4444-a456-79f9b0dc18f1" loading="lazy"/>
 
-But when we "continue" the ```gedit``` process, the task will get terminated.
-
-```image```
+We'll notice how the text editor stays open. But when we "continue" the ```gedit``` process, the task will get terminated.
 
 Understanding how processes work is important for system administrators and security professionals. 
 
-If an application freezes or behaves unexpectedly, pausing or killing a process may resolve the issue. Some processes may consume too much CPU or memory. Knowing how to stop or kill these process helps optimize system performance.
+If an application freezes or behaves unexpectedly, pausing or killing a process may resolve the issue. And some processes may consume too much CPU or memory. So knowing how to stop or kill these process helps optimize system performance.
 
-And in the case of a security incident, we can stop or kill harmful processes before it compromises the system further.
+Not to mention, in the case of a security incident, we can stop or kill harmful processes before it compromises the system further.
 
 Let's wrap up this section by using the XFCE Task Manager tool.
 
-It's a simplified version of System Monitor. But it has a unique feature. Processes will get highlighted different colors based on changes in the system.
+It's a simplified version of System Monitor. But it has a unique feature. Processes will get highlighted different colors based on changes in the system. With clear visual indicators of process states, it becomes easier to monitor system changes in real-time.
 
 Let's illustrate this.
 
-We can find it under ```Applications > ...```.
+We can find it under ```Applications > Accessories > Task Manager```.
 
-```image```
+<img width="365" alt="11  Task manager in linux" src="https://github.com/user-attachments/assets/759ebb06-82d9-4041-9d1b-406e4f45dcfb" loading="lazy"/>
 
 The view is similar to System Monitor, yet simplified.
 
-```image```
+<img width="640" alt="12  Task manager view in linux" src="https://github.com/user-attachments/assets/38557a2d-55bc-47ee-bda4-0fd59b0ace6f" loading="lazy"/>
 
 Now let's open up text editor and see what happens.
 
-```image```
+<img width="768" alt="13  Gedit process highlighted in green" src="https://github.com/user-attachments/assets/cb7602a9-95dc-43fe-a414-5d00a83dd5b4" loading="lazy"/>
 
 As the new ```gedit``` process started, we see it appear highlighted in green. 
 
-We also the see the ```yellow one``` highlighted as yellow. This is our remote session indicating we're altering something on the system. This helps us understand which processes are linked when changed are made.
-
 Once the Task Manager has stabilized, let's close the text editor.
 
-```image```
+<img width="795" alt="14  gedit process highlighted in red" src="https://github.com/user-attachments/assets/3e10bbfa-5c01-42f6-9b24-f76b7d67165b" loading="lazy"/>
 
 Notice how the ```gedit``` process gets highlighted red. 
 
