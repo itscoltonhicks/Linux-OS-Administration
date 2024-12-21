@@ -13,6 +13,8 @@
 - [Lab #4: Viewing System Logs With a GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-4-viewing-system-logs-with-a-gui)
 
 - [Lab #5: The Basics of Operating the Terminal](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-5-the-basics-of-operating-the-terminal)
+
+- [Lab #6: Introductory Commands for Navigating the Linux Terminal](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-6-introductory-commands-for-navigating-the-linux-terminal)
 # Introduction
 
 Cybersecurity is a subset of IT.
