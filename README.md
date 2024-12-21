@@ -429,3 +429,39 @@ Once the Task Manager has stabilized, let's close the text editor.
 Notice how the ```gedit``` process gets highlighted red. 
 
 This shows us that the task is getting terminated, and it'll eventually disappear from the Task Manager view. 
+
+# Lab #4: Operating the Terminal
+
+The terminal is a command line interface in Linux.
+
+It allows us to type text-based commands to interact with the operating system. It's like the control center for our Linux computer. While GUIs let us point and click, the terminal gives us precise control over everything our system can do. 
+
+It's extremely important for system administrators and cybersecurity practitioners. 
+
+Mastering the terminal helps us in a couple ways:
+
+- We can perform tasks faster with commands compared to clicking through menus.
+- We can do things that GUIs can't, like scripting repetitive tasks or accessing advanced system functions.
+- We'll understand how Linux works at its core, improving our problem-solving and troubleshooting skills.
+
+In this short lab, we'll get introduced to the terminal. 
+
+Open a terminal under Applications. Or we can use the ```Ctrl + Alt + T``` shortcut to open one.
+
+```image```
+
+We can create multiple terminals in separate tabs, similar to having multiple tabs open in a single web browser window.
+
+```image```
+
+Or we can detach them into separate windows, docking them side-by-side.
+
+```image```
+
+Let's use the ```exit``` command to terminate one of them. 
+
+```image```
+
+This is enough to introduce us to the terminal.
+
+From here on out, we'll mostly use the terminal for the rest of the labs.
