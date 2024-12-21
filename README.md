@@ -510,3 +510,95 @@ Now let's enter the ```exit``` command to terminate one of them.
 This is enough to introduce us to the terminal.
 
 For our future labs, we'll mostly use the command line.
+
+# Lab #6: Introductory Commands for Navigating the Linux Terminal
+
+Using a terminal is like learning how to drive a manual car—it puts you in direct control and requires precision. 
+
+A graphical user interface (GUI), much like an automatic car, is easier to use. The downside to a GUI is it offers less granular control over the underlying processes. This is why we need to learn how to use the terminal. But just like driving a manual car, mastering the command line comes from getting behind the wheel and taking it out for a spin.  
+
+So in this lab, we'll start using basic commands to get a feel for how it works. We'll focus on orienting ourselves around a couple key Linux principles when using the terminal:
+
+- **Who we are:** We need to understand which user account is currently accessing the system.
+- **Where we are:** We need to understand where we're accessing the terminal on disk.
+- **What we're trying to do:** We need to understand what we're trying to accomplish on the system.
+
+Commands are like instructions. And the CLI responds with outputs based on what we've asked it to do.
+
+For example, if we open up a terminal, we can use the ```whoami``` command to get the current logged-in user account name.
+
+<img width="372" alt="1  whoami command" src="https://github.com/user-attachments/assets/461e8cf0-46ab-4dcf-aedb-143821002c4a" loading="lazy"/>
+
+When we type that command into the terminal, we're instructing the operating system to perform a specific action. 
+
+In this case, we're asking for the current logged-in user account name. And the operating system responds with the name of the current user. The ```Colton``` username is dynamically retrieved and displayed based on the active user session, linking command prompt identity with system log user identification.
+
+Next let's run the ```groups``` command to see which groups our user account belongs to.
+
+<img width="512" alt="2  groups command" src="https://github.com/user-attachments/assets/f7943da0-e0b3-4db8-86eb-6e83b1ec8de0" loading="lazy"/>
+
+The output of ```groups``` is separated by spaces which act like columned results.
+
+We see the "sudo" group listed, among others. This signifies the user's membership in a system administrator group. And this grants our user with potential elevated permissions for system changes. 
+
+Now let's run the ```id``` command to view the ID values of the groups we belong to.
+
+<img width="628" alt="3  id command" src="https://github.com/user-attachments/assets/b69ae899-e677-4a11-a3c8-b465104742b4" loading="lazy"/>
+
+We should recognize some ID values here. For example, we'll see 1000 as our User ID (UID), which we saw in the GNOME Logs tool a couple labs ago. 
+
+Next let's use the ```pwd``` command to "print working directory". 
+
+It'll show us the exact directory path within the computer's file system that the terminal is currently working from. 
+
+<img width="626" alt="4  pwd command" src="https://github.com/user-attachments/assets/b6da1aba-83f2-41a1-b88d-cd1e5f88aa56" loading="lazy"/>
+
+So we're currently operating this terminal within the ```/home/Colton``` directory.
+
+Every command we run starts from the current user and the current directory location on disk. If we want to run commands somewhere else or as someone else, we'd need to specify it—either change the directory, switch users, or specify a different path. 
+
+Commands execute actions based on where we are, unless we specify otherwise.
+
+To illustrate this point further, we can run the ```ls``` command to "list" the files and folders of the current directory.
+
+<img width="627" alt="5  ls command" src="https://github.com/user-attachments/assets/50d79bc2-cc89-4c9f-b5f6-5514deccf68a" loading="lazy"/>
+
+Notice how we only see folders within the ```/home/Colton``` directory. That's where the terminal is currently being accessed on disk.
+
+If we wanted to change our current working directory in the terminal, we can use the ```cd``` command to go somewhere else.
+
+Let's ```cd``` into the ```Desktop``` folder.
+
+<img width="628" alt="6  cd command" src="https://github.com/user-attachments/assets/cab39963-9f07-4494-af4f-50ad110bca56" loading="lazy"/>
+
+Now every command we enter, by default, will execute from the ```/home/Colton/Desktop``` directory. We can confirm this by using the ```ls``` command. We don't have any files or folders in the ```Desktop``` folder, so we won't receive any output.
+
+<img width="626" alt="7  ls within empty directory" src="https://github.com/user-attachments/assets/fca315fe-39ce-4ba7-ac2c-2916a5e531e5" loading="lazy"/>
+
+At this point let's clean up the command by entering ```clear```. We'll have a clear terminal for future commands now. 
+
+So what if I wanted to change directories back up one folder? We can use the ```cd ..``` command to do this. The ```..``` specifies that we want to go back up one folder.
+
+<img width="340" alt="8  cd   command" src="https://github.com/user-attachments/assets/11e87318-3245-48d1-9dfe-b727feb1971a" loading="lazy"/>
+
+Now we're back in the ```/home/Colton``` directory.
+
+Next we'll cover how to access the "manual pages." 
+
+They're comprehensive guides for different commands on our Linux machine. They explain what each command does and how to use it. If we run into issues, we can check the manual pages to find solutions and understand what went wrong. We can also use it to expand our knowledge and skills around a specific command.
+
+For example, we can run the ```man ls``` command to get the manual pages for the ```ls``` command. 
+
+<img width="628" alt="9  man ls command" src="https://github.com/user-attachments/assets/f8d8f509-541e-4705-971f-d1e816decc8a" loading="lazy"/>
+
+Notice how it provides descriptions for the command, the various ways we can use it, and how to format it.
+
+Exit the man pages by hitting the ```q``` key.
+
+Now if we don't want a comprehensive manual page for a command, we can use the ```whatis``` command to get a quick description for what a command does.
+
+<img width="343" alt="10  whatis ls command" src="https://github.com/user-attachments/assets/c766c6a3-4984-4492-9ea5-74732b10989c" loading="lazy"/>
+
+Great. We covered the basics of using the terminal.
+
+In the next section, we'll continue adding layers of complexity. 
