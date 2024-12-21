@@ -398,7 +398,7 @@ We'll notice how the text editor stays open. But when we "continue" the ```gedit
 
 Understanding how processes work is important for system administrators and security professionals. 
 
-If an application freezes or behaves unexpectedly, pausing or killing a process may resolve the issue. And some processes may consume too much CPU or memory. So knowing how to stop or kill these process helps optimize system performance.
+If an application freezes or behaves unexpectedly, pausing or killing a process may resolve the issue. And some processes may consume too much CPU or memory. So knowing how to stop or kill these processes helps optimize system performance.
 
 Not to mention, in the case of a security incident, we can stop or kill harmful processes before it compromises the system further.
 
