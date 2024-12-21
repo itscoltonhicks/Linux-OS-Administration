@@ -8,7 +8,7 @@
 
 - [Lab #2: The File and Folder Structure of a Linux Operating System](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-2-the-file-and-folder-structure-of-a-linux-operating-system)
 
-- [Lab #3: Monitor Running Processes With a Linux GUI]
+- [Lab #3: Monitor Running Processes With a Linux GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-3-monitor-running-processes-with-linux-gui-tools)
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -420,7 +420,7 @@ Now let's open up text editor and see what happens.
 
 <img width="768" alt="13  Gedit process highlighted in green" src="https://github.com/user-attachments/assets/cb7602a9-95dc-43fe-a414-5d00a83dd5b4" loading="lazy"/>
 
-As the new ```gedit``` process started, we see it appear highlighted in green. 
+As the new ```gedit``` process starts, we see it appear highlighted in green. 
 
 Once the Task Manager has stabilized, let's close the text editor.
 
