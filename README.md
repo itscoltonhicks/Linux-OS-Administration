@@ -557,7 +557,7 @@ It'll show us the exact directory path within the computer's file system that th
 
 So we're currently operating this terminal within the ```/home/Colton``` directory.
 
-Every command we run starts from the current user and the current directory location on disk. If we want to run commands somewhere else or as someone else, we'd need to specify it—either change the directory, switch users, or specify a different path. 
+Every command we run starts from the current user and the current directory location on disk. If we want to run commands somewhere else or as someone else, we'd need to indicate it—either change the directory, switch users, or specify a different path. 
 
 Commands execute actions based on where we are, unless we specify otherwise.
 
