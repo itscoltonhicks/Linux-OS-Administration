@@ -9,6 +9,10 @@
 - [Lab #2: The File and Folder Structure of a Linux Operating System](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-2-the-file-and-folder-structure-of-a-linux-operating-system)
 
 - [Lab #3: Monitor Running Processes With a Linux GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-3-monitor-running-processes-with-linux-gui-tools)
+
+- [Lab #4: Viewing System Logs With a GUI](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-4-viewing-system-logs-with-a-gui)
+
+- [Lab #5: The Basics of Operating the Terminal](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-5-the-basics-of-operating-the-terminal)
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -469,7 +473,7 @@ Here's a quick breakdown of what we're seeing:
 - **Audit Session**: This refers to a session that is being monitored for security-related events. The number 2 means this is the second such session recorded.
 - **Priority**: This indicates the severity or importance of the log message. In our example, a priority of 6 tells us that this is an informational message. 
 
-# Lab #5: Operating the Terminal
+# Lab #5: The Basics Of Operating the Terminal
 
 The terminal is a command line interface in Linux.
 
