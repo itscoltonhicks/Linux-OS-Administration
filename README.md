@@ -521,7 +521,7 @@ A graphical user interface (GUI), much like an automatic car, is easier to use. 
 
 So in this lab, we'll start using basic commands to get a feel for how it works. We'll focus on orienting ourselves around a couple key Linux principles when using the terminal:
 
-- **Who we are:** We need to understand which user account is currently accessing the system.
+- **Who we are:** We need to understand which user account we're currently using to access the system.
 - **Where we are:** We need to understand where we're accessing the terminal on disk.
 - **What we're trying to do:** We need to understand what we're trying to accomplish on the system.
 
