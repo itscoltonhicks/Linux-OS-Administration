@@ -604,3 +604,105 @@ Now if we don't want a comprehensive manual page for a command, we can use the `
 Great. We covered the basics of using the terminal.
 
 In the next section, we'll continue adding layers of complexity. 
+
+# Lab #7: Understanding Linux Flags, Tab Autocompletion, and Path Types
+
+Using commands isn't always straightforward—they often come with flags or options that modify their behavior.
+
+Flags or options tweak how commands behave. They perform advanced or more specified nuances of the command. They're usually attached with a tack or hyphen (```-```). And multiple flags can typically be combined together for specific outputs. 
+
+They ultimately help us navigate Linux systems more efficiently.
+
+If we open up a terminal and look at the manual page for the ```ls``` command, we can observe different flags.
+
+<img width="550" alt="1  man ls command to display flags" src="https://github.com/user-attachments/assets/58e0de21-0e2a-4660-af7d-e0c4347bcada" loading="lazy"/>
+
+```-a``` is a common flag that gets used with the ```ls``` command. It lists all files and directories, including hidden ones.
+
+We can search within the man pages by hitting the ```/``` key and start typing. Once we press "enter," we'll see all the entries that match our search.
+
+I'll search for ```-l```, which provides a "long listing format." It gives us detailed information for files and directories.
+
+<img width="475" alt="2  search for -l flag in man pages" src="https://github.com/user-attachments/assets/4f8df57d-f492-4559-a97f-73b158fb4f00" loading="lazy"/>
+
+Exit the man pages.
+
+Now let's run a command with and without flags to observe the difference. We'll start with ```ls -a```. 
+
+<img width="900" alt="3  ls -a command" src="https://github.com/user-attachments/assets/f68c97f7-45d5-46d6-bf88-e8fd58d30f17" loading="lazy"/>
+
+Notice the difference between the two outputs. The output for the ```-a``` flag will display files and directories with a ```.``` before it. These are hidden with the standalone ```ls``` command.
+
+Next I'll run another ```ls``` command with the flags ```-al```. This combines ```-a``` and ```-l``` together.
+
+<img width="500" alt="4  ls -al command" src="https://github.com/user-attachments/assets/bf5372f3-bf5c-4392-a08a-d7242b501c13" loading="lazy"/>
+
+We'll get additional information like permissions, file and folder sizes, and time stamps. 
+
+And we can keep doing this to modify the output. For example, we can tack on the ```-h``` flag to make the file sizes "human-readable." 
+
+<img width="445" alt="5  ls -alh command" src="https://github.com/user-attachments/assets/677d5542-7f48-452d-9f23-0ef98f1dfc32" loading="lazy"/>
+
+Let's clear the terminal.
+
+Next we'll cover the concept of tab autocompletion. 
+
+This is a feature in the command line that automatically completes the command or file name we're typing. We just start typing, then hit the "Tab" key on our keyboard. It's important because it saves us time and reduces errors.
+
+Let's illustrate this with the ```ls``` command.
+
+I'll start typing the ```Documents``` folder to list the files and directories in it. But I'll only input a couple characters. Then I'll press "Tab" to autocomplete it.
+
+<img width="712" alt="6  Tab autocompletion part 1" src="https://github.com/user-attachments/assets/223d0311-2f75-437d-b83b-7fc80f0c6aa4" loading="lazy"/>
+
+AT this point, we should see a couple different options being outputted. This is because two folders start with ```Do``` for their directory name and couldn't complete the tab autocompletion.
+
+Let's try again, but this time try to autocomplete after typing in ```./Doc```.
+
+<img width="711" alt="7  Tab autocompletion part 2" src="https://github.com/user-attachments/assets/f60b6518-283c-4dce-be47-3dba08cd05dc" loading="lazy"/>
+
+Great. It autocompletes for us.
+
+At this point, it's important to cover the difference between relative and absolute paths in Linux. A relative path runs commands based to our current location in the filesystem. On the other hand, an absolute path runs commands based to the root directory, giving the full path from the root.
+
+I'll create a new folder using the ```mkdir``` command so we can illustrate this concept. 
+
+<img width="506" alt="8  mkdir command for testfolder" src="https://github.com/user-attachments/assets/fcfb2c43-3206-41c0-a526-a2f26e78333c" loading="lazy"/>
+
+So let's say we want to change directories into our new ```testfolder```. 
+
+We can do this using its relative path. Remember, by default the terminal will execute commands for our current working directory. So we can simply use the ```cd testfolder/``` command to change directories.
+
+<img width="526" alt="9  cd into testfolder relative path" src="https://github.com/user-attachments/assets/95a5ae8c-2f3c-4b1f-8c8c-0b7278853eec" loading="lazy"/>
+
+There's another way to use its relative path.
+
+We can put ```./``` before the folder's name. This is the relative representation for "here." 
+
+<img width="525" alt="10  cd into testfolder with relative path part 2" src="https://github.com/user-attachments/assets/a4f0c419-005a-45ae-95a8-758da52d3d5a" loading="lazy"/>
+
+Notice how we achieved the same thing. 
+
+But let's say we try to change directories with just the ```/```. 
+
+<img width="513" alt="11  cd with no directory or file showing" src="https://github.com/user-attachments/assets/c0dc8fb6-1df5-43b8-aa84-1a1efa74841b" loading="lazy"/>
+
+We get a message saying the file or directory doesn't exist. 
+
+This is because we're using just the forward slash ```/```. This actually represent the root directory. And we're referencing the root directory, then we'd need to provide the full directory path or the absolute path.
+
+For example, if we use ```pwd``` from our ```testfolder``` directory, we'll see the full directory path on disk. 
+
+<img width="529" alt="12  pwd to get absolute path" src="https://github.com/user-attachments/assets/8fa76f75-f0b0-4671-8bcc-5ffc96fb38b2" loading="lazy"/>
+
+Now if we go back up a directory and try to ```cd``` again with the absolute path, it'll work properly.
+
+<img width="533" alt="13  cd with absolute path" src="https://github.com/user-attachments/assets/3d2edbd2-5aa4-40a5-8055-8383edddd61c" loading="lazy"/>
+
+Understanding the distinction between relative and absolute paths will be very helpful for navigating the filesystem.
+
+That being said, using absolute paths can be a pain to navigate around. So a useful command we can use is ```cd ~```.
+
+The ```~``` key will take us back to our home directory, which is basically our own dedicated space on the system.
+
+<img width="514" alt="14  cd to home directory with shortcut" src="https://github.com/user-attachments/assets/f3f3c0a5-41b5-4bed-af2f-3d46f997b349" loading="lazy"/>
