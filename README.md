@@ -609,7 +609,7 @@ In the next section, we'll continue adding layers of complexity.
 
 # Lab #7: Understanding Linux Flags, Tab Autocompletion, and Path Types
 
-Using commands isn't always straightforward—they often come with flags or options that modify their behavior.
+Using commands aren't always straightforward—they often come with flags or options that modify their behavior.
 
 Flags or options tweak how commands behave. They perform advanced or more specified nuances of the command. They're usually attached with a tack or hyphen (```-```). And multiple flags can typically be combined together for specific outputs. 
 
