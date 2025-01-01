@@ -777,7 +777,7 @@ In our machine, it lives in the ```/bin/``` directory.
 
 <img width="620" alt="7  which nano command" src="https://github.com/user-attachments/assets/2d5ea7b6-7b59-4666-9a96-b26a134a6222" loading="lazy"/>
 
-So if we wanted to edit a file with nano, we'd just use the following command:
+So if we wanted to edit a file with ```nano```, we'd just use the following command:
 
 ```
 nano testfile
