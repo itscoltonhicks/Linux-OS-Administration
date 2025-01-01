@@ -708,3 +708,112 @@ That being said, using absolute paths can be a pain to navigate around. So a use
 The ```~``` key will take us back to our home directory, which is basically our own dedicated space on the system.
 
 <img width="514" alt="14  cd to home directory with shortcut" src="https://github.com/user-attachments/assets/f3f3c0a5-41b5-4bed-af2f-3d46f997b349" loading="lazy"/>
+
+# Lab #8: Linux File Administration on the Command Line
+
+Managing files on the Linux command line is an imporant skill for IT system administrators and cybersecurity professionals. 
+
+Everything in Linux is a file. So mastering file administration allows us to efficiently handle configurations, logs, and data. And this is useful when we're troubleshooting, managing users, or doing any essential task that keeps our systems running smoothly and securely.
+
+In this lab, we'll cover the basics of file administration on the command line.
+
+Start by opening up a terminal and navigate to the ```Desktop``` directory. We'll create a new folder here to illustrate the subsequent file administration tasks.
+
+<img width="575" alt="1  Make testfolder in desktop directory" src="https://github.com/user-attachments/assets/330c6200-9d02-4d6f-b4f6-fd418ef1a196" loading="lazy"/>
+
+Let's change directories into our new folder.
+
+Now we'll use a new command called ```touch```.
+
+The primary purpose of this command is to change file stamps. However, when we use the ```touch``` command with a file name that doesn't already exist in the directory, the command will create an empty file with that name. And we can use it as a shortcut for creating a new empty file.
+
+<img width="537" alt="2  man pages for touch" src="https://github.com/user-attachments/assets/9c0993fd-2524-47fc-a553-2c52b03ac28b" loading="lazy"/>
+
+So let's create a new file with the ```touch``` command.
+
+<img width="849" alt="3  create new file using touch command" src="https://github.com/user-attachments/assets/e956e737-41e4-42e7-83a6-6ad5288c0f47" loading="lazy"/>
+
+Great. Now that we've created a new file, let's add some text to it. 
+
+We'll do this with the following command:
+
+```
+echo "Hello" > testfile
+```
+
+Quick command breakdown:
+- ```echo "Hello"```: The ```echo``` command will display the text "Hello" in the terminal. The text is echoed and gets displayed as output.
+- ```> testfile```: The ```>``` is a redirection operator. It redirects the output of the ```echo``` command to the name of a file. In this case, the text "Hello" is redirected into ```testfile```.
+
+<img width="806" alt="4  echoed hello into a testfile" src="https://github.com/user-attachments/assets/c166a53a-8abb-4958-84c5-e81976101eb3" loading="lazy"/>
+
+We can also append text to the file using the ```>>``` redirection operator.
+
+In other words, if we ```echo``` text using two redirection operators, we'll be able to add new lines of text without affecting the original lines of text.
+
+<img width="787" alt="5  Append text with two redirection operators" src="https://github.com/user-attachments/assets/4627e817-76a9-4387-b405-073515db2bbb" loading="lazy"/>
+
+Notice how we have two lines of text.
+
+But we may just want to read the files within the terminal, as it's a lot more efficient.
+
+The ```cat``` command will help us do this. It stands for "concatenate" because we can join multiple files together with this command. However, for our purposes, we'll simply use it print the contents of the file on our terminal.
+
+Let's ```cat``` our ```testfile```.
+
+<img width="627" alt="6  cat command" src="https://github.com/user-attachments/assets/39357fe4-1d7d-4f29-95a2-7d54e2ffaffe" loading="lazy"/>
+
+Notice how we can view the contents of the file.
+
+So echoing text into files with redirection operators is useful for simple or quick tasks.
+
+But we may want to edit and navigate through multiple lines of text. To accomplish this, we'd want a tool more suitable for longer files. That's where ```nano``` becomes handy.
+
+```nano``` is text editor we can use in the Linux command line.
+
+In our machine, it lives in the ```/bin/``` directory.
+
+<img width="620" alt="7  which nano command" src="https://github.com/user-attachments/assets/2d5ea7b6-7b59-4666-9a96-b26a134a6222" loading="lazy"/>
+
+So if we wanted to edit a file with nano, we'd just use the following command:
+
+```
+nano testfile
+```
+
+After entering the command, we'll see our file's contents within the ```nano``` editor.
+
+<img width="480" alt="8  open nano" src="https://github.com/user-attachments/assets/c66b664e-64d0-4519-b26a-e73ade6efc4a" loading="lazy"/>
+
+We can add some text then use ```Ctrl + X``` to exit. It'll prompt us to save the file, so just type in ```Y``` and click enter once the file name appears. 
+
+<img width="483" alt="9  Save new file in nano" src="https://github.com/user-attachments/assets/19e75184-b5b3-42ff-9e0b-924e273d8ce6" />
+
+Finally, let's delete the file and folder we created for this lab.
+
+We can delete a file using the ```rm``` command. Let's do that now with our ```testfile```.
+
+<img width="900" alt="10  rm testfile command" src="https://github.com/user-attachments/assets/50250df1-1794-4443-bab5-f802c34c9dbd" loading="lazy"/>
+
+Notice how the file is gone now.
+
+Let's go back up a directory and try deleting our ```testfolder```.
+
+<img width="616" alt="11  error when trying to remove a directory" src="https://github.com/user-attachments/assets/b1934189-74a9-410c-87f6-156341833739" loading="lazy"/>
+
+We'll get an error saying that we can't remove it because it's a directory.
+
+To troubleshoot this, we can go to the man pages for the ```rm``` command. We'll discover that if we want to remove a directory, we should use the ```-r``` flag. 
+
+<img width="425" alt="12  man pages for rm" src="https://github.com/user-attachments/assets/cd742473-8ce9-45bc-94bf-a0d2816b3711" loading="lazy"/>
+
+Our command will look like:
+
+```
+rm -r testfolder
+```
+
+Our folder has been successfully deleted.
+
+<img width="624" alt="13  rm -r testfolder command" src="https://github.com/user-attachments/assets/feaf6a6d-1808-4df2-9e27-4e8d187cfc3e" loading="lazy"/>
+
