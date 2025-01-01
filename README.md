@@ -19,6 +19,8 @@
 - [Lab #7: Understanding Linux Flags, Tab Autocompletion, and Path Types](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-7-understanding-linux-flags-tab-autocompletion-and-path-types)
 
 - [Lab #8: Linux File Administration on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-8-linux-file-administration-on-the-command-line)
+
+- [Lab #9: File Permissions on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-9-file-permissions-on-the-command-line)
 # Introduction
 
 Cybersecurity is a subset of IT.
