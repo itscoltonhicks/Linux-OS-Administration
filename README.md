@@ -821,3 +821,154 @@ Our folder has been successfully deleted.
 
 <img width="624" alt="13  rm -r testfolder command" src="https://github.com/user-attachments/assets/feaf6a6d-1808-4df2-9e27-4e8d187cfc3e" loading="lazy"/>
 
+# Lab #9: File Permissions on the Command Line
+
+File and folder permissions in Linux are essential for keeping data secure and organized. 
+
+Permissions act as security rules, controlling who can access or modify files. They ensure that only the right people (or programs) can read, write, or execute files. This is useful for managing servers, sharing resources, or securing sensitive data.
+ 
+Ultimately, understanding permissions will help us prevent unauthorized access or data loss.
+
+Let's open up a terminal and start looking at permissions.
+
+Navigate to the root directory and run ```ls -al```. We'll see folders and files with permission on the left.
+
+<img width="520" alt="1  ls -al command in root directory" src="https://github.com/user-attachments/assets/6b4bf48f-f9db-4e43-8d98-118e9e063d48" loading="lazy"/>
+
+There are three tiers of permissions in Linux. We'll call them "user roles" for the remainder of the lab: 
+
+- **Owner:** The person who created the file/folder.
+- **Group:** A collection of users who share access to the file/folder.
+- **Others:** Every other user on the system.
+
+And we can apply three different permission types to each user role:
+
+- **Read (r):** View the contents of a file/folder.
+- **Write (w):** Modify or delete the file/folder.
+- **Execute (x):*** Run a file or access a folder.
+
+Let's see this in action by zooming in on the home directory for the ```root``` user.
+
+<img width="505" alt="2  permissions of home directory for root user" src="https://github.com/user-attachments/assets/ac2806f2-c7b0-4d61-957c-b38eda743227" loading="lazy"/>
+
+Here's what these set of permissions mean.
+
+- The very first character indicates whether we're dealing with a folder or file. The ```d``` means it's a directory or folder.
+- The next three characters represent the owner role permissions. Notice how the owner of the folder has read, write, and execute permissions.
+- The next three characters represent the group role permissions. A hyphen or tack means that no permissions are granted. Therefore, users in the group role within the ```root``` user directory have no permissions.
+- The final three characters denote the permissions for everyone else. Since we only see tacks, it means that everyone else on the system has no permissions for the ```root``` user directory.
+
+So how do we know who's the owner and what group the ```root``` directory belongs to?
+
+That's what these two columns are for.
+
+<img width="525" alt="3  owner and group columns for permissions" src="https://github.com/user-attachments/assets/38c7a996-addc-409e-bd5b-6b8c7e17de6e" loading="lazy"/>
+
+The left column is the owner's name, and the right column is the group's name. 
+
+So let's say I wanted to view the permissions of the root user's home directory, which is the directory we've been looking at.
+
+<img width="450" alt="4  permission denied to root" src="https://github.com/user-attachments/assets/8b45479e-12ba-4d9d-944e-a84cd737d8f6" loading="lazy"/>
+
+Notice how we get a permission denied error. 
+
+Recall that the ```group``` and ```others``` user roles didn't have permissions set. We're associated with the user roles so we can't look inside the directory. And since we're not the owner of the folder, and we're not accessing it with elevated permissions, we don't have permission to access it. 
+
+Next let's play around with permissions to get a stronger sense for how this works.
+
+Let's go to our home folder.
+
+<img width="515" alt="5  cd to home directory" src="https://github.com/user-attachments/assets/a7d89bb8-2402-4fc7-b3f2-b7ad4785ea75" loading="lazy"/>
+
+I've created an empty file on my home directory called ```nerd```.
+
+We can confirm this by using the ```file``` command, which gives us information on the file type.
+
+<img width="916" alt="6  file command on nerd file" src="https://github.com/user-attachments/assets/4f4f3b70-9546-4139-839b-a8b7c40efccc" loading="lazy"/>
+
+We've confirmed it's an empty file. 
+
+Now, we'll use the ```nerd``` file to illustrate how to modify permissions in Linux. We'll use the ```chmod``` command to do this. It's an important command because it allows us to modify permissions in Linux.
+
+If we use the ```whatis``` command on it, we'll see how it allows us to "change file mode bits."
+
+<img width="515" alt="7  whatis chmod command" src="https://github.com/user-attachments/assets/c7ea2fee-7e30-47b8-8faa-9190ef9808ef" loading="lazy"/>
+
+It'll sound confusing at face value. 
+
+So let's open up the man pages to learn more.
+
+<img width="800" alt="8  man page for chmod" src="https://github.com/user-attachments/assets/6905f51e-371a-4586-82c4-44266400af5d" loading="lazy"/>
+
+I highlighted an important area for our understanding of ```chmod```.
+
+Permissions are set using numeric modes, and they're derived from numeric values that represent different permission types. So in the context of using ```chmod```, "read" permissions are assigned the value 4, "write" permissions are assigned the value 2, and "execute" permissions are assigned the value 1. 
+
+<img width="795" alt="9  numeric values for chmod" src="https://github.com/user-attachments/assets/a7137faf-b097-48c3-b16d-5c5f4ce6fbb5" loading="lazy"/>
+
+Now, when we can combine and add these three numeric values together, an octal digit will emerge as the sum (a number between 0 and 7). 
+
+Each octal digit represents a unique combination of permissions for each user role. This will make more sense once we use ```chmod``` to change permissions.
+
+But for now, let's run through each of the octal digits to see how each combination of permissions work:
+
+- **0**: No permission (0)
+- **1**: Execute only (1)
+- **2**: Write only (2)
+- **3**: Write + Execute (2+1)
+- **4**: Read only (4)
+- **5**: Read + Execute (4+1)
+- **6**: Read + Write (4+2)
+- **7**: Read + Write + Execute (4+2+1)
+
+Do you remember how file permissions are displayed when we used the command ```ls -al```? 
+
+The last nine characters tell us the permissions for each user role. And they're all separated in segments of three—the first segment representing the ```owner``` permissions, the second segment representing the ```group``` permissions, and the third segment represents the ```others``` permissions. 
+
+We'll use the octal digits in the same order.
+
+Technically, there are four octal digits. But we'll omit the first one since it's a bit more complex (and beyond the scope of this lab). The remaining three octal digits will represent the combination of permissions for the owner, group, and others user roles. 
+
+<img width="800" alt="10  octal digits" src="https://github.com/user-attachments/assets/2f2851d1-850d-413c-b634-1cac689cd9a2" loading="lazy"/>
+
+That was a lengthy explanation.
+
+So let's walk through some examples in the command line to cement these ideas in our brain.
+
+Go back to our ```nerd``` file. If we look at the current permissions, we'll see that the owner of the file has read and write permissions. The group user role has read and write permissions as well. Then everyone else only has read permissions.
+
+<img width="514" alt="11  permissions for nerd file" src="https://github.com/user-attachments/assets/19860765-0564-46fa-97ec-de77dc695328" />
+
+Let's change these permissions.
+
+I want to give every user role full permissions (read, write and execute). So I need to add each numeric value for read, write, and execute. This is ```4+2+1=7```. The ```7``` is the octal digit that represents full permissions. 
+
+And since we want every user role to have full permissions, we'll use ```7``` for all three octal digits. 
+
+This is what the command looks like:
+
+```
+chmod 777 nerd && ls -al nerd
+```
+
+Side note: The ```&&``` operator is used to chain commands together, ensuring that the second command (```ls -al nerd```) runs only if the first command is successful. It just makes things more efficient for us.
+
+```image```
+
+Using ```777``` gives us the most permissive setting we can apply to files and directories. It's the riskiest since every user role has the highest level permissions. 
+
+Next let's change permissions to a common setting for files. 
+
+I want the ```owner``` to have read and write permissions. Then I want the ```group``` and ```others``` roles to only have read permissions. 
+
+Here's what that would look like:
+
+```image```
+
+Finally, let's use a more restrictive permission setting that demonstrates the principle of least privilege. 
+
+We'll give the ```owner``` full permissions. But we'll ensure that ```group``` and ```others``` have no permissions.
+
+```image```
+
+Cool. We've covered the basics of using ```chmod``` to change permissions. 
