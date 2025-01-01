@@ -937,11 +937,11 @@ So let's walk through some examples in the command line to cement these ideas in
 
 Go back to our ```nerd``` file. If we look at the current permissions, we'll see that the owner of the file has read and write permissions. The group user role has read and write permissions as well. Then everyone else only has read permissions.
 
-<img width="514" alt="11  permissions for nerd file" src="https://github.com/user-attachments/assets/19860765-0564-46fa-97ec-de77dc695328" />
+<img width="514" alt="11  permissions for nerd file" src="https://github.com/user-attachments/assets/19860765-0564-46fa-97ec-de77dc695328" loading="lazy"/>
 
 Let's change these permissions.
 
-I want to give every user role full permissions (read, write and execute). So I need to add each numeric value for read, write, and execute. This is ```4+2+1=7```. The ```7``` is the octal digit that represents full permissions. 
+I want to give every user role full permissions (read, write and execute). So I need to add each numeric value for read (4), write (2), and execute (1). This is ```4+2+1=7```. The ```7``` is the octal digit that represents full permissions. 
 
 And since we want every user role to have full permissions, we'll use ```7``` for all three octal digits. 
 
@@ -953,22 +953,22 @@ chmod 777 nerd && ls -al nerd
 
 Side note: The ```&&``` operator is used to chain commands together, ensuring that the second command (```ls -al nerd```) runs only if the first command is successful. It just makes things more efficient for us.
 
-```image```
+<img width="513" alt="12  chmod 777" src="https://github.com/user-attachments/assets/b850ae2c-58bf-4404-9887-0cfcdb68d09b" loading="lazy"/>
 
 Using ```777``` gives us the most permissive setting we can apply to files and directories. It's the riskiest since every user role has the highest level permissions. 
 
-Next let's change permissions to a common setting for files. 
+Next let's change permissions to a common setting for files—```chmod 644```.
 
-I want the ```owner``` to have read and write permissions. Then I want the ```group``` and ```others``` roles to only have read permissions. 
+This will give the ```owner``` read and write permissions. Then it'll give the ```group``` and ```others``` roles read only permissions. 
 
 Here's what that would look like:
 
-```image```
+<img width="522" alt="13  chmod 644" src="https://github.com/user-attachments/assets/68e1d388-e2eb-4a06-83d5-fcf27a24a7f3" loading="lazy"/>
 
-Finally, let's use a more restrictive permission setting that demonstrates the principle of least privilege. 
+Finally, let's use a more restrictive permission setting that demonstrates the principle of least privilege—```chmod 700```.
 
-We'll give the ```owner``` full permissions. But we'll ensure that ```group``` and ```others``` have no permissions.
+This will give the ```owner``` full permissions. But it'll ensure that ```group``` and ```others``` have no permissions.
 
-```image```
+<img width="512" alt="14  chmod 700" src="https://github.com/user-attachments/assets/fab594c6-6efd-4b8f-967b-e591d3095c3b" loading="lazy"/>
 
 Cool. We've covered the basics of using ```chmod``` to change permissions. 
