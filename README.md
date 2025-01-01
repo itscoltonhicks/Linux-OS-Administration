@@ -17,6 +17,8 @@
 - [Lab #6: Introductory Commands for Navigating the Linux Terminal](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-6-introductory-commands-for-navigating-the-linux-terminal)
 
 - [Lab #7: Understanding Linux Flags, Tab Autocompletion, and Path Types](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-7-understanding-linux-flags-tab-autocompletion-and-path-types)
+
+- [Lab #8: Linux File Administration on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-8-linux-file-administration-on-the-command-line)
 # Introduction
 
 Cybersecurity is a subset of IT.
