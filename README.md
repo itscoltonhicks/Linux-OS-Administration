@@ -787,7 +787,9 @@ After entering the command, we'll see our file's contents within the ```nano``` 
 
 <img width="480" alt="8  open nano" src="https://github.com/user-attachments/assets/c66b664e-64d0-4519-b26a-e73ade6efc4a" loading="lazy"/>
 
-We can add some text then use ```Ctrl + X``` to exit. It'll prompt us to save the file, so just type in ```Y``` and click enter once the file name appears. 
+We can add some text.
+
+Then use ```Ctrl + X``` to exit ```nano```. It'll prompt us to save the file, so just type in ```Y``` and click enter once the file name appears. 
 
 <img width="483" alt="9  Save new file in nano" src="https://github.com/user-attachments/assets/19e75184-b5b3-42ff-9e0b-924e273d8ce6" />
 
