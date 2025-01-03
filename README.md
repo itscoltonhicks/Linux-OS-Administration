@@ -974,3 +974,15 @@ This will give the ```owner``` full permissions. But it'll ensure that ```group`
 <img width="512" alt="14  chmod 700" src="https://github.com/user-attachments/assets/fab594c6-6efd-4b8f-967b-e591d3095c3b" loading="lazy"/>
 
 Cool. We've covered the basics of using ```chmod``` to change permissions. 
+
+# Lab #10: Diving Deeper Into Linux User Permissions and Sudo Basics
+
+Managing permissions isn’t just about using commands like ```chmod```—it’s about understanding who should access what and why.
+
+Permissions define whether users can read, write, or execute a file. And good system administration means we ought to be intentional with setting them. This ensures only authorized users can modify important files, preventing accidental or malicious changes.
+
+So in this lab, we'll create a user and demonstrate how permissions impact their level of access.
+
+Let's open up a terminal and make sure our ```nerd``` file still exists in ```/home/colton```. I also added some text to it.
+
+<img width="760" alt="1  Checking for nerd file" src="https://github.com/user-attachments/assets/c0aba43e-7f39-4190-acf7-4ca5f4e44e65" loading="lazy"/>
