@@ -21,6 +21,8 @@
 - [Lab #8: Linux File Administration on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-8-linux-file-administration-on-the-command-line)
 
 - [Lab #9: File Permissions on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-9-file-permissions-on-the-command-line)
+
+- [Lab #10: Diving Deeper Into Linux User Permissions and Sudo Basics](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-10-diving-deeper-into-linux-user-permissions-and-sudo-basics)
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -983,7 +985,7 @@ Permissions define whether users can read, write, or execute a file. And good sy
 
 So in this lab, we'll create a user and demonstrate how permissions impact their level of access.
 
-Let's open up a terminal and make sure our ```nerd``` file still exists in ```/home/colton```. I also added some text to it.
+Let's open up a terminal and make sure our ```nerd``` file still exists in ```/home/Colton```. I also added some text to it.
 
 <img width="760" alt="1  Checking for nerd file" src="https://github.com/user-attachments/assets/c0aba43e-7f39-4190-acf7-4ca5f4e44e65" loading="lazy"/>
 
