@@ -1133,11 +1133,7 @@ So, when we entered ```exit```, we removed that layer and went back to our origi
 
 Next we can delete our ```shellbandit``` user from the system.
 
-We'll use the ```deluser``` command for this.
-
-```image of whatis```
-
-We'll run it using ```sudo``` so it can execute with proper permissions:
+We'll use the ```deluser``` command for this. We'll run it using ```sudo``` so it can execute with proper permissions:
 
 ```
 sudo deluser shellbandit
