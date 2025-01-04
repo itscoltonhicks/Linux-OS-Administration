@@ -986,3 +986,161 @@ So in this lab, we'll create a user and demonstrate how permissions impact their
 Let's open up a terminal and make sure our ```nerd``` file still exists in ```/home/colton```. I also added some text to it.
 
 <img width="760" alt="1  Checking for nerd file" src="https://github.com/user-attachments/assets/c0aba43e-7f39-4190-acf7-4ca5f4e44e65" loading="lazy"/>
+
+Great. Now we'll add another user account.
+
+So any administrative task in Linux typically requires elevated permissions. This helps maintain system security and integrity. So, in the case of adding another user account, we'll want to use the ```sudo``` command. This allows us to execute commands as the "root user" or "superuser", giving us the elevated permissions required to carry out the task.
+
+<img width="900" alt="2  sudo man pages" src="https://github.com/user-attachments/assets/2e3e1fb8-e810-482e-9b90-eb4dc5eed7f6" loading="lazy"/>
+
+We can run the ```sudo -l``` command to list information about what administrative commands our current user can execute with ```sudo```. 
+
+<img width="769" alt="3  sudo -l command" src="https://github.com/user-attachments/assets/2b326124-1783-4aff-9b85-82647763c2d4" loading="lazy"/>
+
+Highlighted above, we can run any command as any user on any host using ```sudo```.
+
+So before creating a new user, let's illustrate the basics of how ```sudo``` works. I'll create a new file with ```sudo``` to display what it means to execute a command as the root user.
+
+I'll call the file ```SudoPermissionFile```:
+
+```
+sudo touch SudoPermissionFile
+```
+
+Now we can check the permissions for this file. 
+
+Notice how it's owned by the root user and root group.
+
+<img width="789" alt="4  file permissions for root user" src="https://github.com/user-attachments/assets/93d9efae-904d-4935-8fd6-4c2015338c25" loading="lazy"/>
+
+This is an example of how using ```sudo``` executes a command as the root user. 
+
+If we try adding text into this file without using ```sudo```, we'll get a permission denied error. 
+
+<img width="805" alt="5  permission denied to add text without sudo" src="https://github.com/user-attachments/assets/9feb1ad5-1ef5-4258-aafb-16a13c433197" loading="lazy"/>
+
+This is happening because the ```Colton``` user doesn't have write permissions for this file.
+
+So we'd need to prefix the command with ```sudo``` in order to add text. 
+
+<img width="772" alt="6  redirection operator isn't passing sudo beyond it" src="https://github.com/user-attachments/assets/432fa324-628a-4737-bf03-75fcc4661482" loading="lazy"/>
+
+Whoops, looks like we're still getting a permission denied error. 
+
+This is happening because the redirection operator is executed by the shell, not the ```sudo``` command. The ```echo "hello"``` command has elevated permissions. But the redirection operation ```>``` acts like a secondary gatekeeper who also needs elevated permissions. The redirector doesn't carry ```sudo``` permissions beyond it.
+
+So we'll need to execute the command as an entire ```sudo``` statement by using ```bash -c```:
+
+
+```
+sudo bash -c "echo 'hello' > SudoPermissionFile"
+```
+
+<img width="774" alt="7  sudo bash -c command" src="https://github.com/user-attachments/assets/8922d02f-80a6-4266-9bb9-8c83f3738a6b" loading="lazy"/>
+
+Here's a quick command breakdown:
+
+- ```sudo```: Runs the command with administrator privileges.
+- ```bash -c```: This tells our Bash shell to run a specific command or a series of commands within quotes. It allows us to run the entire sequence of commands using ```sudo```.
+- ```echo 'hello' > SudoPermissionFile```: This writes "hello" into the file named ```SudoPermissionFile```. This is being executed as the root user. 
+
+Now let's delete this file using the ```sudo``` command:
+
+<img width="808" alt="8  sudo rm command" src="https://github.com/user-attachments/assets/ddcdf0c1-88f8-498f-b6b7-2bd6fb8af8bb" loading="lazy"/>
+
+So we've covered the basics of ```sudo```.
+
+Now we're ready to create a new user. We'll do this with the ```adduser``` command. And it'll be executed as the root user:
+
+```
+sudo adduser shellbandit
+```
+
+After executing the command, we'll see a a few things appear:
+
+- A new group named ```shellbandit``` is added.
+- A new user with the User ID 1001 is created. 
+- A home directory for ```shellbandit``` is created.
+- A prompt for a password.
+
+After entering the password, we'll be prompted with some additional information. We can keep them blank or fill them in, then press the ```y``` key when we're done. 
+
+<img width="529" alt="9  sudo adduser command" src="https://github.com/user-attachments/assets/27385209-6232-4986-887f-d7b2ec93f52f" loading="lazy"/>
+
+Now we have our second user.
+
+Let's open up a new terminal and dock it—one for the ```Colton``` user, and the other for our ```shellbandit``` user. Next we'll log into our new user account in the new terminal. We'll do this with the ```su``` command. This allows us to run commands with a substitute user and group ID. 
+
+So we can run a persistent shell as another user simply with the command of ```su <username>```. 
+
+<img width="925" alt="10  man pages for su" src="https://github.com/user-attachments/assets/7542a684-c39a-4a18-9d22-ff56102080ba" loading="lazy"/>
+
+We'll use it with our ``shellbandit``` user and get prompted for the password.
+
+```
+su shellbandit
+```
+
+Once complete, the terminal will assume we're in a ```shellbandit ``` shell. 
+
+<img width="925" alt="11  New shell session with shellbandit user" src="https://github.com/user-attachments/assets/92f3789e-7ee6-4ad7-ad5b-099bb966c991" loading="lazy"/>
+
+Let's quickly run through a few commands to get familiar with our new user:
+
+- Run ```whoami``` to confirm we're operating the terminal with our new user account.
+- Run ```groups``` to see that ```ShellBandit``` doesn't belong to any other group than their own.
+- Navigate to the home directory and list all directories nested within it. We'll notice how the ```/home/ShellBandit``` directory was created for the new user. 
+
+<img width="925" alt="12  investigate our new shellbandit user" src="https://github.com/user-attachments/assets/338ddd30-227d-406f-a6ba-d33a52b9c142" loading="lazy"/>
+
+Now let's try to read the ```nerd``` file from our ```shellbandit``` user. We need to navigate to Colton's home directory to access it.
+
+This will reveal whether or not our permissions are working as intended.
+
+<img width="925" alt="13  permission denied to cat nerd file from shellbandit user" src="https://github.com/user-attachments/assets/6f567b08-cb1a-4fcf-95e5-04e0eec596bc" loading="lazy"/>
+
+Next we'll modify permissions so our ```shellbandit``` user can read it.
+
+I'll go back to the ```Colton``` shell session and run ```chmod 707```. This will give everyone else on the system full permissions (read, write, and execute). 
+
+```
+chmod 707 nerd
+```
+
+We can view the newly set permission in our ```shellbandit``` terminal and notice how it instantly updates.
+
+<img width="925" alt="14  chmod 707 command" src="https://github.com/user-attachments/assets/e794d5ec-0ef9-4112-9cac-15b786bb4789" loading="lazy"/>
+
+Now we can read the file from our ```shellbandit``` user. 
+
+<img width="925" alt="15  cat nerd file from shellbandit user after new permissions" src="https://github.com/user-attachments/assets/457eec99-b35c-4d0a-83ce-528fcf6651db" loading="lazy"/>
+
+We can also append text to it.
+
+<img width="925" alt="16  append text from shellbandit user account" src="https://github.com/user-attachments/assets/a35d52e5-f29d-4b0e-be78-11b7a693ade6" loading="lazy"/>
+
+So that's how user permissions work in practice. We're done now, so let's clean up our environment.
+
+We can ```exit``` the ```shellbandit``` shell. 
+
+<img width="925" alt="17  exit a shell instance" src="https://github.com/user-attachments/assets/275602a7-f49e-4f73-be92-f30b571f1e56" loading="lazy"/>
+
+Notice how we didn't get logged out of the terminal. We simply returned to our original user account. This is because ```su``` created a new shell session on top of our original one. Think of it like adding a new layer over the existing one.
+
+So, when we entered ```exit```, we removed that layer and went back to our original shell session.
+
+Next we can delete our ```shellbandit``` user from the system.
+
+We'll use the ```deluser``` command for this.
+
+```image of whatis```
+
+We'll run it using ```sudo``` so it can execute with proper permissions:
+
+```
+sudo deluser shellbandit
+```
+
+<img width="557" alt="18  sudo deluser command" src="https://github.com/user-attachments/assets/acb77c65-a43e-43ef-a4f0-802fa12d23e8" loading="lazy"/>
+
+I'll also delete the ```nerd``` file, and any other resources I created for this lab.
