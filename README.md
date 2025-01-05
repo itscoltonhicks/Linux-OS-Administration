@@ -23,6 +23,8 @@
 - [Lab #9: File Permissions on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-9-file-permissions-on-the-command-line)
 
 - [Lab #10: Diving Deeper Into Linux User Permissions and Sudo Basics](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-10-diving-deeper-into-linux-user-permissions-and-sudo-basics)
+
+- [Lab #11: Group Permissions in Linux](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-11-group-permissions-in-linux)
 # Introduction
 
 Cybersecurity is a subset of IT.
