@@ -1142,3 +1142,171 @@ sudo deluser shellbandit
 <img width="557" alt="18  sudo deluser command" src="https://github.com/user-attachments/assets/acb77c65-a43e-43ef-a4f0-802fa12d23e8" loading="lazy"/>
 
 I'll also delete the ```nerd``` file, and any other resources I created for this lab.
+
+# Lab #11: Group Permissions in Linux
+
+User groups provide a streamlined way to grant permissions and eliminate the need for multiple layers of individual permission settings.
+
+We accomplish this by associating user accounts with groups (along with additional file setting configurations). This saves time, reduces errors, and simplifies user management. Understanding how to properly set up user groups and permissions ensures data integrity and secure access control. So in this lab, we'll walk through various commands for assigning group-based permissions.
+
+We're going to make a group, add two people to it, and change some file settings so everyone has the right permissions.
+
+Let's open up a terminal and create two new users.
+
+<img width="525" alt="1  adding two new users" src="https://github.com/user-attachments/assets/9c947428-8ff4-40ab-9326-70e162c34dca" loading="lazy"/>
+
+We've added two new users to the system, ```anakin``` and ```luke```.
+
+Next we'll create a new group using the ```addgroup``` command:
+
+```
+sudo addgroup jedicouncil
+```
+
+<img width="550" alt="2  sudo addgroup command" src="https://github.com/user-attachments/assets/03367aba-ea47-4425-847a-10398c66934a" loading="lazy"/>
+
+Now that we have our new group, we'll want to add both of our users to it.
+
+We can accomplish this by using the ```usermod``` command. It allows us to modify user account information. We'll run it as the root user, then use the flags ```-aG``` to specify which group we'll be adding users to. 
+
+Here's the command for our first user:
+
+```
+sudo usermod -aG jedicouncil anakin
+```
+
+Quick command breakdown:
+
+- ```sudo```: This runs the command with administrator privileges.
+- ```usermod```: This command allows us to modify user account information.
+- ```-aG```: The ```-a``` flag adds ```anakin``` to the new group without removing him from other groups (i.e. it appends). And the ```-G``` flag specifies the name of the group we're adding ```anakin``` to, which is the ```jedicouncil``` group.
+- ```jedicouncil```: The name of the group.
+- ```anakin```: The user account.
+
+Now repeat the same command for the ```luke``` user.
+
+```
+sudo usermod -aG jedicouncil luke
+```
+
+<img width="513" alt="3  usermod -aG command" src="https://github.com/user-attachments/assets/efc2dbf0-c0e1-4e11-a510-bb87845060b0" loading="lazy"/>
+
+So to verify that we added the users to the group, we can run the ```groups``` command against a specific user name.
+
+<img width="513" alt="4  groups command" src="https://github.com/user-attachments/assets/7a7afc4d-eef2-48c0-b97c-e484741f393e" loading="lazy"/>
+
+At this point, it's helpful to know where some of this information is stored on disk.
+
+We'll look at the following files:
+
+- ```/etc/passwd```
+- ```/etc/shadow```
+- ```/etc/group```
+
+Let's start with ```/etc/passwd```.
+
+If we ```cat``` that file, we'll see a list of user account information. It stores things like the username, UID, GID, and the user's home directory path.
+
+<img width="600" alt="5  cat etc passwd file" src="https://github.com/user-attachments/assets/c480c558-9cdf-42e9-be93-000b10e63865" loading="lazy"/>
+
+The file is pretty bloated though. So we can use the ```grep``` command to filter for specific keywords or patterns. 
+
+Let's ```grep``` the same file, filtering for both of our new users.
+
+<img width="505" alt="6  grep command for etc passwd file" src="https://github.com/user-attachments/assets/650c5d63-8870-4b7a-9327-760f93344395" loading="lazy"/>
+
+By "grepping" the ```/etc/passwd``` file, we can quickly confirm if our new users exist on the system (which they do).
+
+Next we'll look at the ```/etc/shadow``` file. 
+
+This file stores hashed passwords for user accounts. And for that reason, it requires ```sudo``` permissions to access it. Only system administrators should have access to it. So let's ```grep``` this file as the root user, using both of our new user accounts as the search pattern. 
+
+First for the ```anakin``` user:
+
+```
+sudo grep anakin /etc/shadow
+```
+
+Then for the ```luke``` user:
+
+```
+sudo grep luke /etc/shadow
+```
+
+<img width="866" alt="7  sudo grep etc shadow file" src="https://github.com/user-attachments/assets/51258e37-4857-4fd8-8301-471e321ca09a" loading="lazy"/>
+
+Finally we'll look at the ```/etc/group``` file. 
+
+It keeps track of all the groups on the system. And it'll contain all the users that belong to each group.
+
+Let's ```grep``` the ```/etc/group``` file, using ```jedicouncil``` as the search pattern.
+
+<img width="869" alt="8  sudo grep etc group file" src="https://github.com/user-attachments/assets/1565ed46-76bf-46c3-971c-90c4c90659e8" loading="lazy"/>
+
+We'll see that both of our users belong to our new group.
+
+Great. Now let's continue illustrating group permissions by docking two terminals—one session as ```anakin```, and one session as ```luke```. 
+
+We'll use the ```su``` command to change users.
+
+<img width="925" alt="9  docked view of two new users" src="https://github.com/user-attachments/assets/ec3564db-a0fb-49fd-a49a-e8b84b27e661" />
+
+Next we'll create a file from the ```anakin``` shell.
+
+```anakin``` will be the file owner. Then we'll make the file accessible to all members of the ```jedicouncil``` group. To keep with our Star Wars theme, I'll create file called ```tatooineWeatherReport```.
+
+Then I'll echo the text ```Weather updates from Tatooine (spoiler: always sunny).``` into the file.
+
+```
+echo "Weather updates from Tatooine (spoiler: always sunny)." > tatooineWeatherReport
+```
+
+<img width="925" alt="10  adding new file about tatooine weather" src="https://github.com/user-attachments/assets/a5f986b5-a125-406b-886c-415c8725add9" loading="lazy"/>
+
+Now we'll use ```chmod 770``` on the file to give the group full permissions to the file.
+
+<img width="925" alt="11  chmod 770" src="https://github.com/user-attachments/assets/302b8d90-152e-4799-a14d-5c6076813226" loading="lazy"/>
+
+Lastly, notice in the image above that the second column still says ```anakin```. 
+
+This is the group name assigned to the file. We need to change this to ```jedicouncil``` so that all members of this group can access the file. The ```chown``` command helps us to do this.
+
+It allows us to change file ownership using the following syntax.
+
+<img width="501" alt="12  chown man pages" src="https://github.com/user-attachments/assets/6da496bb-13fc-4188-88d9-040f748a4708" loading="lazy"/>
+
+So we'll use the following command to change the group assigned to the file:
+
+```
+chown anakin:jedicouncil tatooineWeatherReport
+```
+
+<img width="501" alt="12  chown man pages" src="https://github.com/user-attachments/assets/9bbebd0e-b2bf-48f3-b007-9a41fa1c89c8" loading="lazy"/>
+
+Now everyone in the ```jedicouncil``` group should be able to access the file.
+
+We can illustrate this by hopping into the ```luke``` shell and navigating to where the ```tatooineWeatherReport``` file lives on disk, which is Anakin's home directory.
+
+<img width="925" alt="14  luke viewing tatooine file" src="https://github.com/user-attachments/assets/a7b30ea6-f252-461d-915e-3ac1a5277390" loading="lazy"/>
+
+As we can see in the image above, ```luke``` can read the file because they're a member of the ```jedicouncil``` group. 
+
+Let's ```exit``` the ```luke``` user shell.
+
+We're now operating the terminal from our original user account.
+
+If we try to view the file from here, we'll get a permission denied error.
+
+<img width="925" alt="15  permission denied for tatooine file in colton shell" src="https://github.com/user-attachments/assets/cc98be57-0aa1-4e86-8217-db0ae269bad7" loading="lazy"/>
+
+The ```Colton``` user account—which falls under the ```others``` user role for the file permissions—doesn't have any permissions set.
+
+That's it for group permissions. We'll clean up the environment by exiting the terminals, removing the file, and deleting the new user accounts (just like in previous labs).
+
+Except this time, we'll also delete the ```jedicouncil``` group by using the ```delgroup``` command:
+
+```
+sudo delgroup jedicouncil
+```
+
+<img width="515" alt="16  sudo delgroup command" src="https://github.com/user-attachments/assets/5c50f2a7-f54b-4604-8a4c-64a23af53cc1" loading="lazy"/>
