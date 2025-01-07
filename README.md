@@ -25,6 +25,8 @@
 - [Lab #10: Diving Deeper Into Linux User Permissions and Sudo Basics](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-10-diving-deeper-into-linux-user-permissions-and-sudo-basics)
 
 - [Lab #11: Group Permissions in Linux](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-11-group-permissions-in-linux)
+
+- 
 # Introduction
 
 Cybersecurity is a subset of IT.
@@ -1312,3 +1314,197 @@ sudo delgroup jedicouncil
 ```
 
 <img width="515" alt="16  sudo delgroup command" src="https://github.com/user-attachments/assets/5c50f2a7-f54b-4604-8a4c-64a23af53cc1" loading="lazy"/>
+
+# Lab #12: Finding & Searching on the Command Line
+
+Trying to find files through a Linux terminal can feel like searching for a needle in a haystack. 
+
+And that's why we have the ```find``` command. It's like a metal detector for sifting through that haystack—it helps locate specific files, folders, or data buried deep within directories. It's also important for troubleshooting a system issue or triaging an incident.
+
+So in this lab, we'll walk through how to use ```find```.
+
+The ```find``` command is very powerful.
+
+It allows us to search for files in a directory hierarchy. The man pages are packed with flags that specify user-defined conditions. These conditions filter *what* to search for, *where* to search, and *how* to match specific attributes.
+
+Feel free to scroll down the man pages to view these flags.
+
+<img width="650" alt="1  man pages for find" src="https://github.com/user-attachments/assets/8efc7f77-57e9-4e71-977c-fc10c8f8641e" loading="lazy"/>
+
+We'll walk through some common flags.
+
+But first, we'll add a few things to our system to demonstrate these different flags in action:
+
+- We'll create a file in lowercase.
+- We'll create a file in uppercase.
+- We'll give one of the files ```700``` permissions, providing the file owner read, write, and execute access.
+- We'll make a directory.
+
+<img width="525" alt="2  add files and directory for find command" src="https://github.com/user-attachments/assets/1f1344ff-2020-4923-b0da-f446aed238f8" loading="lazy"/>
+
+Great. Now let's walk through common flags for ```find```.
+
+## Search by File Name
+
+So when we know the name of a file (or a portion of it), we can use a "file name" condition to easily sift through files.
+
+We'll start each command with ```find .```.  The ```find``` command is naturally how we start the search, and the ```.``` dot specifies the current directory as the starting point for the search. 
+
+Then we'll use the ```-name``` flag with the exact case sensitive file name:
+
+```
+find . -name passwords.txt
+```
+
+<img width="506" alt="3  find   -name command" src="https://github.com/user-attachments/assets/82bd5500-57c2-43b7-8257-2c65974ba4c7" loading="lazy"/>
+
+But let's say that we don't know the full file name. 
+
+We only know a portion of it. Well we can wrap some text inside of quotes and asterisks. For example, if we use ```"*pass*"```, then the output will be any file that contains the text ```pass``` within it. 
+
+The asterisks function as wildcards, allowing any number and combination of characters is valid in the location of each asterisk.
+
+```
+find . -name "*pass*"
+```
+
+<img width="603" alt="4  find   -name command with wildcards" src="https://github.com/user-attachments/assets/73749508-931a-4825-887d-3328a5ef6647" loading="lazy"/>
+
+Observe how we've retrieved multiple files that contain ```pass``` somewhere within their name, including two of the files we created earlier.
+
+However, we'll also notice that we don't see our uppercase file in the output.
+
+This is because the ```-name``` flag searches for files with case sensitive results. So if we're unsure of case sensitivity or just want to guarantee we're not missing a file, we can use the ```-iname``` flag to search with case insensitive results. 
+
+Let's use this flag to find our uppercase file:
+
+```
+find . -iname "*pass*"
+```
+
+<img width="609" alt="5  find   -iname command" src="https://github.com/user-attachments/assets/a97d11dd-aefc-4b22-83ad-609d7db5ff6f" loading="lazy"/>
+
+Now we're able to see our uppercase file.
+
+The ```-name``` flag can also be used to find files with specific file extension types. 
+
+For instance, let's say we only want to find files with the ```.txt``` file extension. We'd just use the same command and put the file extension in quotes. Then we'd add an asterisk to the front of the extension, indicating that the file can be named anything as long as it ends with ```.txt```.
+
+```
+find . -iname "*.txt"
+```
+
+<img width="628" alt="6  find txt files" src="https://github.com/user-attachments/assets/d8a26210-5369-45fb-80d0-55939e40b6c0" loading="lazy"/>
+
+## Search by Type
+
+Maybe we'd like to search for a specific type of object.
+
+For example, let's say we only want to search for files when we're cleaning up our system. The ```-type``` flag helps us do this. 
+
+To build upon our previous search commands, let's only look for case insensitive files:
+
+```
+find . -iname "*pass*" -type f
+```
+
+<img width="638" alt="7  type f flag for find command" src="https://github.com/user-attachments/assets/41432280-869e-475e-b1f1-61ad99c51393" loading="lazy"/>
+
+The ```f``` option specifies we're looking for files only.
+
+But we'll notice that our newly created directory won't be shown. So we can use the ```d``` option to specify directories only:
+
+```
+find . -iname "*pass*" -type d
+```
+
+<img width="612" alt="8  type d flag for find command" src="https://github.com/user-attachments/assets/e26b5d39-4f13-42b3-8d21-11dec67fde6b" loading="lazy"/>
+
+## Search by Ownership
+
+Perhaps we'd like to search for results based on user or group ownership of files.
+
+This is useful for identifying orphaned files, files owned by specific users, or files that might pose security risks due to incorrect ownership.
+
+Let's start by searching for files owned by a specific user, which we can use the ```-user``` flag for.
+
+```
+find . -iname "*pass*" -type f -user Colton
+```
+
+<img width="610" alt="9  Search for files by user ownership" src="https://github.com/user-attachments/assets/a4c736b4-0a64-47da-881f-050679f10b47" loading="lazy"/>
+
+This shows us all the files that the ```Colton``` user owns.
+
+Now let's search for files that belong to a specific group, which is where the ```-group``` flag becomes useful. I'll use ```Colton``` as the name of the group.
+
+And I'll focus the next search on directories.
+
+```
+find . -name "*pass*" -type d -group Colton
+```
+<img width="505" alt="10 Search for directory by group ownership" src="https://github.com/user-attachments/assets/a1906211-8fc0-44fe-81fd-8d9e4249c928" loading="lazy"/>
+
+Now we'll only see one directory that belongs the group named ```Colton```. 
+
+## Search by Permissions
+
+We might want to find files based on their read, write, or execute permissions.
+
+This is helpful for identifying files with insecure permissions, to enforce best practices, and prevent unathorized access. For example, what if we only wanted to find files where the owner has full permissions? Then we could use the ```-perm``` flag and its corresponding file mode bits.
+
+We'd use a command like this:
+
+```
+find . -iname "*pass*" -type f -user Colton -perm 700
+```
+
+<img width="513" alt="11  search by perm 700" src="https://github.com/user-attachments/assets/1f14276e-685b-498b-a259-a9a4f5224ad1" loading="lazy"/>
+
+Now we'll only see files where the file owner named ```Colton``` has read, write, and execute permissions on it. Even though we used ```-iname``` for a case insensitive result, the ```PASSWORDS.txt``` file didn't show up because the file owner doesn't have full permissions. 
+
+## Search by Size
+
+Perhaps we'd like to find files by its size.
+
+This is hepful for cleaning up storage, identifying large or unusually small files, and managing disk usage. We'd use the ```-size``` flag to accomplish this. Then we'd specify the size itself. 
+
+For example, let's say we're looking for files that are exactly 1 kilobyte in size:
+
+```
+find . -type f -size 1k
+```
+
+<img width="450" alt="12  search by -size 1k" src="https://github.com/user-attachments/assets/46623501-4a4e-4836-9637-eec4f4a53ce5" />
+
+We'll get a list of files that are 1 kilobyte in size. But if we wanted to specify files smaller or larger than 1 kilobyte, then we'd use ```-``` or ```+``` before the ```1k```.
+
+Let's look for files smaller than 1 kilobyte.
+
+```
+find . -type f -size -1k
+```
+
+<img width="771" alt="13  search by size -1k" src="https://github.com/user-attachments/assets/5b6b9d91-c9be-4786-b83e-839e45a4e26a" loading="lazy"/>
+
+Now we'll see our newly created files listed.
+
+## Search by Modification Time
+
+Maybe we want to find files that have been recently modified.
+
+This is useful for incident response and system troubleshooting, especially when searching for logs or recent file changes. This is when we'd use the ```mmin``` flag. Then we'd just specify the modification time in minutes.
+
+For example, here's how we'd search for file changes within the past minute. We use ```-1``` to denote "within the last minute:"
+
+```
+find . -type f -mmin -1
+```
+
+This command is correct, but we won't see any output from the "password" files we created earlier.
+
+The reason is because we haven't modified those files yet. We've only created them. So if we added some text to one of the files and repeat the command, we'll see one of our "password" files in the output.
+
+<img width="515" alt="14  search by file modification in minutes" src="https://github.com/user-attachments/assets/886fce96-c5a1-4aa4-a4cc-7b43954c45bd" loading="lazy"/>
+
+That wraps up the basics for using the ```find``` command. 
