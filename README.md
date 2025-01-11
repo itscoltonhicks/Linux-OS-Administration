@@ -1510,3 +1510,135 @@ The reason is because we haven't modified those files yet. We've only created th
 <img width="515" alt="14  search by file modification in minutes" src="https://github.com/user-attachments/assets/886fce96-c5a1-4aa4-a4cc-7b43954c45bd" loading="lazy"/>
 
 That wraps up the basics for using the ```find``` command. 
+
+# Lab #13: Process Management on the Command Line
+
+The command line is a powerful tool for managing and inspecting system processes.
+
+Everything in Linux is a file. And we can interact with processes, memory, and system stats as files on the command line. Unlike graphical interfaces (GUIs), the command line offers speed, flexibility, and deeper insights into what's happening under the hood of Linux. It's essential for system administrators, cybersecurity professionals, and developers who need precise control over system operations.
+
+So in this lab, we'll use various commands and tools to navigate system processes. 
+
+Let's start by opening up a terminal and running a command called ```top```.
+
+It's similar to System Monitor and Task Manager. It displays a "table of processes" running on the Linux system. And it does this in real-time on the command line.
+
+<img width="575" alt="1  top command" src="https://github.com/user-attachments/assets/f17682fa-32b6-412f-a9ca-5519cbe377cc" loading="lazy"/>
+
+Notice how it's running continuously and dynamically, changing as the operating system is in use. 
+
+We can enter the ```h``` key to get some help on how to use the ```top``` tool. We'll see actions we can perform, like ```l```, ```t```, and ```m```. 
+
+<img width="542" alt="2  get help for top tool" src="https://github.com/user-attachments/assets/935bae4f-ecc8-4fbd-b952-8ab9c1a38dd1" loading="lazy"/>
+
+Let's illustrate these three actions inside of ```top```.
+
+Entering ```l``` will display the load average or overall system consumption.
+
+<img width="525" alt="3  load average in top" src="https://github.com/user-attachments/assets/158a4094-20fc-4f58-aa3b-e077a2aa8904" loading="lazy"/>
+
+Entering ```t``` shows us different tasks and CPU stats.
+
+<img width="525" alt="4  task and cpu info in top" src="https://github.com/user-attachments/assets/a4961d31-b209-41fb-a492-59eca631ca6f" loading="lazy"/>
+
+Entering ```m``` gives us a different view on memory consumption.
+
+<img width="525" alt="5  memory info in top" src="https://github.com/user-attachments/assets/361644d0-3cef-42fd-8385-b4f038c69093" loading="lazy"/>
+
+Great. We can also search or "locate" processes with ```shift + L```.
+
+I'll open up ```text editor``` on the system, enter ```shift +L```, and type in ```gedit``` (its process name in Linux).
+
+<img width="775" alt="6  locate gedit string in top" src="https://github.com/user-attachments/assets/53375f76-cf13-46db-86f8-9b055a806b15" loading="lazy"/>
+
+We'll see the ```gedit``` process highlighted.
+
+<img width="775" alt="7  gedit process highlighted in top" src="https://github.com/user-attachments/assets/4cb361cc-f216-41bb-81bb-63bea854a0dd" loading="lazy"/>
+
+Then we can kill a process by entering the ```k``` key and type the associated PID for the ```gedit``` process.
+
+<img width="934" alt="8  kill a process in top" src="https://github.com/user-attachments/assets/d08dae8c-ab47-4b58-9aa6-42b11ae6a546" loading="lazy"/>
+
+Once we click ```Enter``` to confirm the kill command, the ```text editor``` will no longer be running as an active instance. 
+
+<img width="900" alt="9  gedit process killed in top" src="https://github.com/user-attachments/assets/b81bba49-cfce-4848-9e39-4f3a1b3d4214" loading="lazy"/>
+
+That's the basics of using ```top``` to monitor system processes.
+
+Next we'll run through additional commands to explore how processes work deeper under the hood of Linux.
+
+Let's begin with the ```free``` command. This simply displays the amount of free and used memory in the system. 
+
+<img width="540" alt="10  free command" src="https://github.com/user-attachments/assets/2f3feff9-70c1-464b-bd08-7d06cbfc42d1" loading="lazy"/>
+
+We can use the ```-h``` flag to view the  human-readable format of our memory consumption.
+
+<img width="532" alt="11  free -h command" src="https://github.com/user-attachments/assets/72420b39-de0c-4c19-ab5b-71460edcce6e" />
+
+Next let's look at the ```df``` command.
+
+This tells us the disk space usage on the file system. We'll see all of our disks and partitions (which are just smaller storage sections separated on a disk). These file partitions are largely set up for isolation and backup purposes. 
+
+We can use the command with or without the ```-h``` flag.
+
+<img width="475" alt="12  df command" src="https://github.com/user-attachments/assets/1e9b7594-cda7-4779-9453-794f9c8ccb63" loading="lazy"/>
+
+Now let's look at the ```ps``` command.
+
+It's powerful because it'll give us a snapshot of the current processes running on the system.
+
+<img width="506" alt="13  ps command" src="https://github.com/user-attachments/assets/c34eb016-8205-45a3-8cf4-108079186dec" loading="lazy"/>
+
+The command by itself doesn't give us many details.
+
+So if we want to see every process on the system, we can use the ```aux``` flags together. It'll show us information on all the processes currently running, the user running each process, and background service processes.
+
+<img width="650" alt="14  ps aux command" src="https://github.com/user-attachments/assets/2470d41f-2a8b-4398-969c-d08f47627cef" loading="lazy"/>
+
+This becomes powerful when we pipe the output of ```ps aux``` to the ```grep``` command. 
+
+This will filter for specific processes and display it on our terminal. The pipe operator ```|``` passes the output from one command to the subsequent one, much like a conveyer belt. 
+
+To illustrate this, we open up the ```text editor``` again and run the following command to filter for it:
+
+```
+ps aux | grep gedit
+```
+
+<img width="626" alt="15  ps aux with grep command" src="https://github.com/user-attachments/assets/746b99b9-baed-41cf-a78d-7d7a7dd85094" loading="lazy"/>
+
+Now we see a snapshot of the ```gedit``` process currently running on our system.
+
+Similar to using the ```top``` tool, we can kill a process directly on the command line. All we need is the process ID (PID) and the ```kill``` command.
+
+<img width="643" alt="16  kill gedit process in terminal" src="https://github.com/user-attachments/assets/9d4d5867-2dd2-4c4f-a644-5f407fd6c92f" loading="lazy"/>
+
+We'll notice how the ```text editor``` has disappeared. We can confirm this by trying to get another screenshot of the ```gedit``` process. This time, we'll notice how the specific process associated with the editor is gone.
+
+To wrap up this section, we'll inspect the ```/proc``` directory on the command line.
+
+Remember that ```/proc``` contains information for system processes and they're organized by PIDs. There are also additional system information files there as well (e.g. ```uptime```).
+
+<img width="940" alt="17  ls proc directory" src="https://github.com/user-attachments/assets/ed0a788f-e5f5-43cf-91f8-64dec1fa7a28" loading="lazy"/>
+
+And since these files exist in memory, they dynamically change based on what's happening in the system.
+
+We can illustrate this by opening up ```text editor``` again. I'll also use the ```ps aux | grep gedit``` command to grab the PID. 
+
+Then we'll inspect the ```/proc``` directory again and see how our ```gedit``` PID was added.
+
+<img width="845" alt="18  processes dynamically change in proc directory" src="https://github.com/user-attachments/assets/61d84755-427b-487b-a7ae-c077fda71b54" loading="lazy"/>
+
+We can also look inside the PID folder ```2559``` and see the files associated with the ```gedit``` process.
+
+<img width="795" alt="19  list files inside of gedit process file" src="https://github.com/user-attachments/assets/a0a03469-db44-47a2-a70c-3a789fa89906" loading="lazy"/>
+
+This information is very useful. It helps us further understand what a process is doing, how it’s interacting with the system, and whether it’s behaving as expected (or causing problems).
+
+We can also illustrate how command binaries and files work together. 
+
+For instance, we can use the ```uptime``` command to view the information on the terminal. And all this command did was pull that information from the ```uptime``` file. 
+
+<img width="795" alt="20  uptime command and cat uptime file in proc directory" src="https://github.com/user-attachments/assets/96194111-94cb-47a8-98f1-224836fb14d7" loading="lazy"/>
+
+That wraps up our lab. We can begin to see that, when we become more familiar with the command line, we have much greater control over our Linux machines.
