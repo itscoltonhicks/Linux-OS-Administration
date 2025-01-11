@@ -193,6 +193,8 @@ Port 3389 is the default port for Remote Desktop Protocol (RDP). So I'll go to m
 
 I misconfigured it the first time by accident, so ignore the "8080Inbound" naming convention for the new rule. Unfortunately we can't change names once it's set.
 
+**Side Note**: *Later in the project I adjust my NSG to only allow remote access from my IP address. This is more ideal if you don't want a bunch of brute force attempts (and possibly a DoS incident).* 
+
 Now we'll use our Remote Desktop client to access the machine. 
 
 <img width="302" alt="16  rdp" src="https://github.com/user-attachments/assets/f72fb602-c841-4dec-860c-d35d5184964e" loading="lazy"/>
