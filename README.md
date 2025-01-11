@@ -27,6 +27,8 @@
 - [Lab #11: Group Permissions in Linux](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-11-group-permissions-in-linux)
 
 - [Lab #12: Finding and Searching on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-12-finding--searching-on-the-command-line)
+
+- [Lab #13: Process Management on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-13-process-management-on-the-command-line)
 # Introduction
 
 Cybersecurity is a subset of IT.
