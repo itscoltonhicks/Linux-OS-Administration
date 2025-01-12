@@ -1644,3 +1644,206 @@ For instance, we can use the ```uptime``` command to view the information on the
 <img width="795" alt="20  uptime command and cat uptime file in proc directory" src="https://github.com/user-attachments/assets/96194111-94cb-47a8-98f1-224836fb14d7" loading="lazy"/>
 
 That wraps up our lab. We can begin to see that, when we become more familiar with the command line, we have much greater control over our Linux machines.
+
+# Lab #14 : Linux Services with ```Systemctl```
+
+The ```systemctl``` command is used to control and manage Linux services.
+
+A service is a special program that runs in the background, independent of direct user interraction. We need the ```systemctl``` command to start, stop, and check these services. It's kind of like a remote control where we can turn services on, off, and check them when needed. 
+
+If we check the man pages, we'll see how the ```systemctl``` command allows us to control the ```systemd``` system and service manager.
+
+<img width="830" alt="1  services with systemctl" src="https://github.com/user-attachments/assets/135f3f6e-ba53-4e1b-84a9-b3a3c060fd07" loading="lazy"/>
+
+```systemd``` is a system and service manager that manages all the services on our machine. 
+
+It keeps everything organized and running smoothly. It's important for ensuring services start in the correct order and don't crash. So it's like the air traffic controller making sure all the planes (services) take off and land without crashing into each other.
+
+Let's run ```systemctl``` and see what comes up. I'll use the ```--no-pager``` flag to display all the output at once (but you can run it without the flag to get the same output). 
+
+<img width="795" alt="2  systemctl command" src="https://github.com/user-attachments/assets/6c7fcb07-c4ad-41d4-b72d-c71bf2fcdb26" />
+
+We'll see all active "units" on the system:
+
+There are various columns worth noting:
+
+- **Unit**: This shows the name of the service or unit that the system is managing. It's important because we need to know which services we're looking at.
+
+- **Load**: This shows us if a service's configuration has been loaded properly. It's important for checking if services are set up correctly.
+
+- **Active**: This shows the high-level state of the service. It's important to know whether or not a service is in use.
+
+- **Sub**: This provides us more detailed information on a service's state. This is important for giving us a clearer picture of what the service is doing.
+
+- **Description**: This gives a brief explanation of what the service does. It's important for context.
+
+Some Linux systems will also display a **job** column that shows the current job being executed on the service, if any. It helps us see which actions are being performed by a service.
+
+Now when we type ```systemctl``` and hit the Tab key for "tab autocompletion," we'll see a list of options that the ```systemctl``` command can take. These are subcommands for performing actions with ```systemctl```, as well as unit names we can manage.
+
+We'll narrow our options by looking at the various ```list``` subcommands for ```systemctl```. They display detailed information about various units and components of the system.
+
+<img width="899" alt="3  systemctl options with tab autocomplete" src="https://github.com/user-attachments/assets/c6a7c8bf-af14-4211-b7ea-5c672bc47570" loading="lazy"/>
+
+If we want to list all the units (tasks and services) on the system, including inactive and dead ones, we can run the following command:
+
+```
+systemctl list-units --all
+```
+
+The ```-all``` flag ensures we see the inactive units.
+
+<img width="795" alt="4  systemctl list-units --all" src="https://github.com/user-attachments/assets/1f719304-c7b2-41e8-855b-b39e0514f49d" loading="lazy"/>
+
+Notice how inactive and dead units are highlighted red. 
+
+Since we're focusing on services in this lab, we'll use the ```list-units``` subcommand and append the ```--type=service``` flag to it. This ensures we only see service units:
+
+```
+systemctl list-units --type=service
+```
+
+<img width="795" alt="5  systemctl list-units --type=service" src="https://github.com/user-attachments/assets/b276bcde-cf7b-4215-8513-7158287cc6d9" loading="lazy"/>
+
+Now we see a proper list of just services.
+
+But we're still missing the inactive and dead services from this view. So we can add the ```--all``` flag to the service request version of ```list-units```.
+
+```
+systemctl list-units --type=service --all
+```
+
+<img width="900" alt="6  systemctl list-units --type=service --all" src="https://github.com/user-attachments/assets/27322e8a-b494-4cec-8620-5db4fdf7e38d" loading="lazy"/>
+
+Great. Now we see all services, which is helpful for troubleshooting. 
+
+We can get an even more targeted view of inactive services by using the ```--state=inactive``` flag to the command.
+
+```
+systemctl list-units --type=service --state=inactive
+
+```
+
+<img width="900" alt="7  systemctl list-units --type=service --state=inactive" src="https://github.com/user-attachments/assets/8d8218f8-a438-4131-b8de-5bb776e3838a" loading="lazy"/>
+
+Now we'll only see inactive services.
+
+We can also pipe a ```grep``` search to this command to find specific services.
+
+For instance, here's how we'd search for the ```ssh``` service:
+
+```
+systemctl list-units --type=service | grep "ssh"
+```
+
+<img width="585" alt="8  grepping a systemctl service request" src="https://github.com/user-attachments/assets/b281c1c0-2571-4535-a337-21ee7048ed6f" loading="lazy"/>
+
+Once we know which service we'd like to inspect, we can use the ```status``` command to view details.
+
+We'll do this with the SSH service.
+
+SSH (Secure Shell) is a networking protocol used for secure communication between devices. And there are typically two types of services when it comes to networking protocols. There's one for the client, and one for the server. 
+
+We can view these differences by using the ```status``` command for ```ssh```, but tab autocompleting it before executing the command.
+
+```
+systemctl status ssh <tab autocomplete>
+```
+
+Using tab autocomplete will show us how there is ```ssh.service``` and ```sshd.service```.
+
+<img width="588" alt="9  tab autocompleting systemctl status ssh" src="https://github.com/user-attachments/assets/aaa9edd9-43d9-4dec-ae67-acbb986039d0" />
+
+The ```ssh.service``` allows us, as the client, to connect over SSH connections.
+
+The ```sshd.service``` is the SSH daemon, which are like helper services that provide additional functionality. This one functions as a server. This means that the ```sshd.service``` allows other endpoints (clients) to connect to us with the SSH protocol.
+
+So now let's actually look at the status of ```sshd.service```.
+
+```
+systemctl status sshd.service
+```
+
+We'll see the status information of the service.
+
+We can see the activity status, PIDs, memory consumption, and a related logs at the bottom.
+
+<img width="630" alt="10  systemctl status sshd service" src="https://github.com/user-attachments/assets/de09d93f-5916-4819-8358-06b3d32f3042" loading="lazy"/>
+
+So we might want to do more than just inspect services.
+
+Perhaps we want to interact with them. There are commands we can use with ```sudo``` to do this. For instance, we can ```reload``` a service.
+
+This would be useful when we've made changes to a service's configuration files and want those changes to take effect (without interrupting the service by killing it).
+
+```
+sudo systemctl reload sshd.service
+```
+
+<img width="550" alt="11  reload sshd service" src="https://github.com/user-attachments/assets/cb4539c9-febd-4c91-91a0-6ec209188d65" loading="lazy"/>
+
+The ```status``` command shows us logs associated with the reloading of the service.
+
+We can also ```restart``` the service. This completely stops and interrupts the service for a brief moment, then starts it back up.
+
+This is useful if a service is hung up.
+
+```
+sudo systemctl restart sshd.service
+```
+
+<img width="521" alt="12  restart sshd service" src="https://github.com/user-attachments/assets/8cbf96a4-3d0a-4320-8858-f0b701f7a49b" loading="lazy"/>
+
+Previous logs aren't displayed immediately after a restart, whereas using the ```reload``` command retains the previous logs while appending the new ones related to it reloading. 
+
+This means that using the ```restart``` command resets the service completely, as if starting from a fresh slate. 
+
+We can also fully stop a service by using the following command:
+
+```
+sudo systemctl stop sshd.service
+```
+
+<img width="529" alt="13  stop sshd service" src="https://github.com/user-attachments/assets/2066624a-c409-4a48-9094-0d5546d1db3f" loading="lazy"/>
+
+We can see how the service isn't running anymore.
+
+And we can start it back up with the following command:
+
+```
+sudo systemctl start sshd.service
+```
+
+<img width="534" alt="14  start sshd service" src="https://github.com/user-attachments/assets/bba68768-d02b-4084-ac51-61e8ddf15b56" loading="lazy"/>
+
+It's active and running again.
+
+At this point, there are two final states to be aware of—```enabled``` and ```disabled```. These states determine startup behavior at boot. We need to use the ```list-unit-files``` subcommand to view this. The ```list-units``` focuses on displaying the state of units currently loaded into memory. This is good for seeing what's happening in real time. But the ```list-unit-files``` subcommand displays the unit files that exist on disk. This contains information on how a unit is configured (like whether or not it's enabled).
+
+Let's first view enabled services, which will tell us which services will start at boot.
+
+```
+systemctl list-unit-files --type=service --all --state=enabled
+```
+
+<img width="650" alt="15  list only enabled services on system" src="https://github.com/user-attachments/assets/9b36ce05-014f-43a3-bbbe-791ad9136ca2" loading="lazy"/>
+
+Quick command breakdown:
+
+- ```systemctl```: The command-line tool for interacting with ```systemd``` system and service manager.
+- ```list-unit-files```: This lists unit files instead of the actual running units.
+- ```--type=service```: This flag specifies that only service units should be listed.
+- ```--all```: This flag indicates that all unit files should be listed (including disabled, static, or generated units). 
+- ```--state=enabled```: This flag further filters the list to include only service unit files that are enabled.
+
+Once we see all the enabled services on the system, we can run a similar command to see the disabled ones.
+
+This reveals which services do not start at boot.
+
+```
+systemctl list-unit-files --type=service --all --state=disabled
+```
+
+<img width="627" alt="16  list only disabled services on system" src="https://github.com/user-attachments/assets/6e7bd6d0-6745-4f05-8407-aaf6d3b1fe7e" loading="lazy"/>
+
+Now we understand the basics of inspecting and interacting with services on the command line.
