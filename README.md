@@ -1849,3 +1849,263 @@ systemctl list-unit-files --type=service --all --state=disabled
 <img width="627" alt="16  list only disabled services on system" src="https://github.com/user-attachments/assets/6e7bd6d0-6745-4f05-8407-aaf6d3b1fe7e" loading="lazy"/>
 
 Now we understand the basics of inspecting and interacting with services on the command line.
+
+# Lab #15: Data Streams and Command Redirection
+
+Data streams in Linux are like invisible highways that move data from one place to another.
+
+They allow our computer to send and receive information between various programs and files. We need data streams because they help our Linux machine communicate efficiently. If we didn't have them, it'd be like trying to transfer water between locations without a pipe or hose—messy and inefficient.
+
+Information wouldn't be able to flow smoothly between programs and files.
+
+There are three main types of data streams in Linux:
+
+- **Standard Input (STDIN)**: This is where data enters the system. We can type a command or feed data from a file. This is like water flowing into a pipe.
+- **Standard Output (STDOUT)**: After the command processes the input data, it sends the result out through ```STDOUT``` to be displayed on the terminal screen (or saved). This is like water flowing out of the pipe on the other end.
+- **Standard Error (STDERR)**: If something goes wrong with the data stream, the error message flows through ```STDERR``` and alerts us about the issue on the terminal screen. This is like a leak in the pipe, causing water to spill out and alert us to a problem.
+
+Everything revolves around these streams of data.
+
+To illustrate this, we can run the ```echo "hello"``` command.
+
+The ```echo "hello"``` command functions as ```STDIN```. And the echoed response displays on our terminal screen through ```STDOUT```. 
+
+<img width="510" alt="1  echo hello" src="https://github.com/user-attachments/assets/204a25b4-b47d-4601-850a-d798fc5b9ddd" loading="lazy"/>
+
+Now we'll try inputting the same text with a command that doesn't exist. This will output an error statement through a ```STDERR``` data stream.
+
+The terminal is capturing my keystrokes and filling the command line with ```STDIN```. But we won't get a valid output through the ```STDOUT``` data stream. Instead, we'll get an output with error information.
+
+Both ```STDOUT``` and ```STDERR``` provide us output. However, ```STDOUT``` gives us valid output, whereas ```STDERR``` gives us error information in the output.
+
+<img width="525" alt="2  echoed hello command with stderr" src="https://github.com/user-attachments/assets/40ed22d0-c262-4909-a648-0d3e36736684" loading="lazy"/>
+
+At this point, we have a basic understanding of data streams.
+
+But the real magic happens when we manipulate these data streams. This allows us to control the flow of data—where data goes, how it's processed, and how to respond to issues. And we can do this by using redirectors.
+
+We've used a few redirectors in previous labs. So let's review them and add additional ones to our arsenal:
+
+- ```>```: This redirects ```STDOUT``` somewhere else (commonly a file).
+- ```>>```: This appends ```STDOUT``` somewhere else (commonly a file).
+- ```<```: This redirects ```STDIN``` from a file or another input source.
+- ```<<EOF```: This redirects ```STDIN``` from multiple lines of text until the ```EOF``` marker is reached.
+- ```|```: This redirects ```STDOUT``` as ```STDIN``` for the subsequent set of commands. 
+
+Let's walk through each redirector and observe how data streams work.
+
+To reinforce concept, we'll start with a command we've already used multiple times:
+
+```
+echo "hello" > hello.txt
+```
+
+<img width="805" alt="3  echo hello with redirector" src="https://github.com/user-attachments/assets/61b6fa29-a459-441a-ba63-da5099fa2f58" loading="lazy"/>
+
+So here we're seeing that ```>``` takes the text "hello"—the ```STDOUT``` from ```echo "hello```—and redirects it into a file named ```hello.txt```. 
+
+We can confirm that the ```STDOUT``` was redirected into the ```hello.txt``` file by using the ```cat``` command on it.
+
+<img width="796" alt="4  cat hello txt" src="https://github.com/user-attachments/assets/115ea21e-aa39-4880-9399-2be9a2e5098c" loading="lazy"/>
+
+And in the same way, we can use the ```>>``` redirector to append ```STDOUT``` to the same ```hello.txt``` file.
+
+<img width="789" alt="5  appending redirector" src="https://github.com/user-attachments/assets/dc4a9416-84bb-4a9f-b647-fae13746f2b5" loading="lazy"/>
+
+Let's reinforce these concepts by playing with the ```cat``` command a bit.
+
+So ```cat``` normally reads a file as input and sends it to ```STDOUT```, which displays on the terminal screen. But what happens when we run ```cat``` without a file name? 
+
+If we don't provide a file name, ```cat``` doesn't know what to display, so it switches into "waiting mode." It'll start listening for input from the keyboard (```STDIN```). This is happening because the ```cat``` command is designed to work with data streams. And without a file to use as input, it prompts us to provide input directly from the keyboard. 
+
+It's like we're telling the terminal, *"I want you to read something out loud."* But it responds by saying, *"Okay, well I don't have a file to read. Tell me what to read!"* 
+
+The terminal prompts us to start typing so it can use it as ```STDIN```. Then the terminal will repeat our words back to us immediately. This is the ```STDOUT```.
+
+<img width="808" alt="6  cat without STDIN" src="https://github.com/user-attachments/assets/5948862e-2c22-449a-93d4-1d80cdac199b" loading="lazy"/>
+
+We can enter ```Ctrl + C``` to end the input/output session.
+
+Now let's add ```> textfile.txt``` to the ```cat command:
+
+```
+cat > textFileForat.txt
+```
+
+Here's what'll happening.
+
+I'm basically telling the terminal: *"This time, don't just repeat the text through ```STDOUT```. Redirect the ```STDOUT``` to another file instead."* And it responds by saying: *"Sure. But once again, I'll need input that I can redirect. So tell me what you want redirected to this other file."*
+
+The terminal will then prompt us for text to use as ```STDIN```. And instead of just repeating the text through ```STDOUT```, it'll redirect it to another file. 
+
+We can confirm this by looking inside this new file and noticing the text that got redirected through ```STDOUT```.
+
+<img width="926" alt="7  cat redirected into new file" src="https://github.com/user-attachments/assets/0926ce74-da7c-4348-960e-2e1fc3c7eba9" loading="lazy"/>
+
+Next let's look at the ```<``` redirector.
+
+We'll use the ```wc -l``` command to illustrate it. ```wc``` is a command that counts lines, words, and characters from a file (or standard input). The ```-l``` flag specifies that we want to count the number of lines.
+
+So if we ran ```wc -l``` against our ```hello.txt``` file, we'll see how many lines are in it.
+
+<img width="911" alt="8  wc -l command" src="https://github.com/user-attachments/assets/46bc199c-43b6-4434-b2a9-9c1a85298b77" loading="lazy"/>
+
+And we can use the ```<``` operator to achieve the same result:
+
+```
+wc -l < hello.txt
+```
+
+Here the ```hello.txt``` file serves as the ```STDIN```. And this input is being redirected to the ```wc -l``` command. This command then calculates the number of lines in ```hello.txt```, sends it to ```STDOUT```, and displays the result on the terminal screen.
+
+<img width="933" alt="9  wc -l with redirector" src="https://github.com/user-attachments/assets/08189a9e-ae8f-40d4-a342-c052d64746fd" loading="lazy"/>
+
+The next redirector is ```<<EOF```. 
+
+This creates a "Here Document," which allows us to enter multiple lines of text that can be used as ```STDIN```. And it'll read every line of input until the ```EOF``` delimiter is used (marking the "end of file"). 
+
+So for example, we can run the same ```wc -l``` command against this new operator.
+
+<img width="512" alt="10  EOF redirector" src="https://github.com/user-attachments/assets/abe00720-feb1-4b45-bdf7-08fb618763bc" loading="lazy"/>
+
+Here the block of text we entered serves as the ```STDIN```. And this input is being redirected to the ```wc -l``` command. This then calculates the number of lines in our "Here Document," sends it to ```STDOUT```, and displays the result on the terminal screen.
+
+We can use the same operator with the ```cat``` command.
+
+The block of text serves as ```STDIN``` and gets sent to the ```cat``` command.
+
+Then we see the same text—everything before EOF—get sent to ```STDOUT``` and display it on the terminal screen.
+
+<img width="519" alt="11  cat command with EOF redirector" src="https://github.com/user-attachments/assets/83a9b4fd-1b1a-40fe-8d10-23dc3551c582" loading="lazy"/>
+
+Great.
+
+Now let's say we want to redirect error messages to a new file. That way, we can troubleshoot or debug the issue at a future time.
+
+We can ```cat``` a file that doesn't exist to illustrate this. Then we can try to redirect it into a new file, similar to how we've been doing it.
+
+```
+cat aNonexistentFile > error.log
+```
+
+<img width="508" alt="12  redirecting error message with another error" src="https://github.com/user-attachments/assets/e1469a00-c60d-47db-821a-76e8b97b1db4" loading="lazy"/>
+
+Despite using the redirector, we still get an error message.
+
+This happens because the ```>``` only redirects ```STDOUT```. And we're currently trying to redirect a ```STDERR```.
+
+To properly redirect ```STDERR```, we need to know that each data stream has a number representing it:
+
+- STDIN = 0
+- STDOUT = 1
+- STDERR = 2
+
+So we can successfully redirect ```STDERR``` by throwing a ```2``` in front of our operator.
+
+```
+cat aNonexistentFile 2> error.log
+```
+
+If we ```cat``` the ```error.log```, we'll see that it worked.
+
+<img width="571" alt="13  cat an error log" src="https://github.com/user-attachments/assets/474a922b-bc95-4a5f-b8ec-7ea472d2c8f5" loading="lazy"/>
+
+The same principle applies for appending standard error messages.
+
+```
+cat aNonexistentFile 2>> error.log
+```
+
+<img width="586" alt="14  appending error message into error log" src="https://github.com/user-attachments/assets/fc775bda-61f7-43d9-9d92-df34f4d00bd7" loading="lazy"/>
+
+Now notice how there are two lines of errors when we ```cat``` it.
+
+Sometimes we may want to redirect output or errors into oblivion. This is useful if we want to remove clutter from our terminal or suppress unnecessary information. And we can do this by redirecting ```STDOUT``` or ```STDERR``` into a file named ```/dev/null```.
+
+```/dev/null``` acts as a black hole for data.
+
+So, if we were to redirect an error message to this file, it'd get immediately discarded.
+
+```
+cat aNonexistentFile > error2.log 2> /dev/null
+```
+
+Here's a quick command breakdown:
+
+- ```cat aNonexistentFile```: This tries to display the contents of ```aNonexistentFile```, which doesn't exist.
+- ```> error2.log```: This redirects ```STDOUT``` from the previous command to ```error2.log```. Even though the file doesn't exist, this part of the command still runs and creates a file named ```error2.log```. But nothing gets redirected to it because there was nothin in ```STDOUT``` from the ```cat``` command. For that reason, ```error2.log``` remains empty.
+- ```2> /dev/null```: This redirects standard error messages (```STDERR```) to ```/dev/null```. This will discard all error messages. 
+
+<img width="684" alt="15  redirecting stdout and stdin with dev null" src="https://github.com/user-attachments/assets/bd92073d-b0b8-4521-8e0f-8c248cdace21" loading="lazy"/>
+
+Notice how ```error2.log``` exists, but there's no text in it.
+
+Finally, we'll wrap up this lab with the ```|``` operator. We can use it to redirect ```STDOUT``` as ```STDIN``` for subsequent commands, much like a conveyer belt.
+
+So, for example, we could get a screenshot of our current system processes and pipe that ```STDOUT``` to a command like ```less``` to read it.
+
+```less``` is a terminal pager for viewing data one screen at a time. I also keeps the terminal uncluttered by not retaining the output once we exit.
+
+```
+ls /proc | less
+```
+
+<img width="555" alt="16  list proc files with less pager" src="https://github.com/user-attachments/assets/8457fd50-97ed-4633-a057-f5e06534eadb" loading="lazy"/>
+
+That's a pretty simple use case for the ```|``` redirector.
+
+But we can use multiple pipe operators to manipulate data in more sophisticated ways. For instance, let's say we wanted to see all the users on our system. 
+
+Remember that this information exists in ```/etc/passwd```.
+
+<img width="647" alt="17  cat etc passwd" src="https://github.com/user-attachments/assets/22ff1ab8-dc3b-46be-91af-b01b99e22a07" loading="lazy"/>
+
+There's a lot of clutter. 
+
+So we can use the ```cut```command to filter out any unnecessary information. All we need to do is specify a delimiter and the field we want to view.
+
+```
+cat /etc/passwd | cut -d : -f 1
+```
+
+Here the ```-d :``` flag specifies that we want to separate text by the ```:```. The ```:``` is the delimiter. And the ```-f 1``` flag specifies that we want to view the first field of text that comes before ```:```. 
+
+The first field is the user column.
+
+<img width="578" alt="18  cat etc passwd with cut command" src="https://github.com/user-attachments/assets/9783c475-320f-424c-93d1-76ae7b3cdf6c" loading="lazy"/>
+
+Now we only see a list of users.
+
+But let's say we also want to view these users in alphabetical order. We can pipe the ```sort``` command to it to accomplish this.
+
+```
+cat /etc/passwd | cut -d : -f 1 | sort
+```
+
+<img width="499" alt="19  read sorted list of users" src="https://github.com/user-attachments/assets/12304cee-7c70-4366-b324-e2e1f13c9524" loading="lazy"/>
+
+Notice how all the users are sorted now.
+
+We can also redirect this entire output into a new file called ```users.txt```.
+
+```
+cat /etc/passwd | cut -d : -f 1 | sort > users.txt
+```
+
+<img width="689" alt="20  redirect sorted list of users to new file" src="https://github.com/user-attachments/assets/4536fee1-82e9-422f-9e93-4b8eb903335e" loading="lazy"/>
+
+Now we can investigate the user names at a later time.
+
+But instead of having a list of names, let's just get a count of how many users are on the system. All we need to do is pipe ```wc -l``` to the entire command.
+
+Then we can redirect that output into a new file named ```numberOfUsers.txt```.
+
+```
+cat /etc/passwd | cut -d : -f 1 | sort | wc -l > numberOfUsers.txt
+```
+
+<img width="762" alt="21  redirect number of users into new file" src="https://github.com/user-attachments/assets/46e48af0-487d-4a45-b9fe-591b6c3533bc" loading="lazy"/>
+
+Now when we ```cat``` our new file, we'll see how there are 48 users on the system.
+
+That concludes our lab on data streams!
