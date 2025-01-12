@@ -1693,7 +1693,7 @@ If we want to list all the units (tasks and services) on the system, including i
 systemctl list-units --all
 ```
 
-The ```-all``` flag ensures we see the inactive units.
+The ```--all``` flag ensures we see the inactive units.
 
 <img width="795" alt="4  systemctl list-units --all" src="https://github.com/user-attachments/assets/1f719304-c7b2-41e8-855b-b39e0514f49d" loading="lazy"/>
 
