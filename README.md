@@ -31,6 +31,8 @@
 - [Lab #13: Process Management on the Command Line](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-13-process-management-on-the-command-line)
 
 - [Lab #14: Linux Services with ```Systemctl```](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-14--linux-services-with-systemctl)
+
+- [Lab #15: Data Streams and Command Redirection](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-15-data-streams-and-command-redirection)
 # Introduction
 
 Cybersecurity is a subset of IT.
