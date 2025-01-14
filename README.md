@@ -2111,3 +2111,191 @@ cat /etc/passwd | cut -d : -f 1 | sort | wc -l > numberOfUsers.txt
 Now when we ```cat``` our new file, we'll see how there are 48 users on the system.
 
 That concludes our lab on data streams!
+
+# Lab #16: Create Scheduled Tasks with Crontab
+
+Scheduling tasks in Linux automates repetitive actions.
+
+The key tool for doing this is ```Cron```, which is a daemon (background service) that runs tasks at specific times. ```Cron``` refers to the Greek word "chronos," indicating its role in time-based job scheduling. And we can use the ```crontab``` command to interact with the configuration file that stores these scheduled tasks. 
+
+This saves us time by handling tasks like backups, updates, and routine jobs. 
+
+Let's get started by opening up a terminal.
+
+<img width="531" alt="1  whatis crontab" src="https://github.com/user-attachments/assets/02fb48b4-1bce-40dc-b736-345f14957e72" loading="lazy"/>
+
+We're going to open a ```crontab``` file and add a scheduled task.
+
+But before doing this, we'll want to specify the text editor to be used for editing the configuration file. We can use the ```select-editor``` command to do this.
+
+A list of options pop up. For simplicity, choose the ```nano``` editor.
+
+<img width="541" alt="2  select-editor command" src="https://github.com/user-attachments/assets/efbd6b2d-fff2-4858-a84f-6c66ca84d008" loading="lazy"/>
+
+Great. Now we can open up and edit the configuration file by using the ```crontab``` command with the ```-e``` flag.
+
+<img width="551" alt="3  crontab -e" src="https://github.com/user-attachments/assets/550e9b9b-763a-4c81-a694-a5c1afe1e099" loading="lazy"/>
+
+We'll see some lines that start with a ```#```.
+
+These are "comments" and won't be interpreted as scheduled tasks. 
+
+<img width="800" alt="4  crontab file comments" src="https://github.com/user-attachments/assets/122e7a8b-2a2d-43da-b39e-179021965bfb" loading="lazy"/>
+
+Now we can go to the bottom of the file to enter text.
+
+Setting a scheduled task requires us to enter special symbols, followed by the command we want to automate on the system. These special symbols represent values for minute, hour, day of the month, the month, and the day of the week.
+
+To illustrate this, we'll only use asterisks to represent the time. This means that text will get appended into the file every minute.  
+
+Then we'll run a command to append text into a file.
+
+```
+* * * * * echo "hello there" >> /home/Colton/hellothere.txt
+```
+
+<img width="800" alt="5  crontab task for appending text" src="https://github.com/user-attachments/assets/089be993-01bb-4264-9bf7-f1eb223a855b" loading="lazy"/>
+
+Let's exit and save the file. 
+
+Quickly use the ```date``` command to get the current time stamp.
+
+After a couple minutes, we'll come back to the terminal and check the file.
+
+<img width="828" alt="6  scheduled task in action with echo hello there" src="https://github.com/user-attachments/assets/eb8c985b-4d6e-4a83-8994-a06f4a31b86a" loading="lazy"/>
+
+We'll notice 3 lines of text appear. This tells us that our scheduled task has ran three times already.
+
+So if we want to view all the scheduled tasks of the current user without editing them, we can use the ```-l``` flag. 
+
+<img width="566" alt="7  crontab -l command" src="https://github.com/user-attachments/assets/d3085f75-02b0-4433-9dc8-095b815653c6" loading="lazy"/>
+
+At the bottom we'll see our scheduled task. 
+
+Now let's say we want to delete our scheduled task. All we need to do is use the ```-r``` flag with ```crontab```. 
+
+<img width="526" alt="8  crontab -r command" src="https://github.com/user-attachments/assets/f944a554-713e-4271-a0f5-bb32ee99ed19" loading="lazy"/>
+
+Notice how our cron table no longer exists. Another approach is to just use the ```-e``` flag again, delete the scheduled task entry, then save the configuration file.
+
+Moving on.
+
+Let's run a more sophisticated scheduled task. 
+
+We'll use this task to dive deeper into "cron expressions." These are the first five special symbols in a crontab entry that define the schedule or time at which the task should run. 
+
+First, let's look at the order of these cron expressions:
+
+- The first entry represents the minute.
+- The second entry represents the hour.
+- The third entry represents the day of the month.
+- The fourth entry represents the month.
+- The fifth entry represents the day of the week. 
+
+```
+* * * * * command-to-be-executed
+- - - - -
+| | | | |
+| | | | +---- Day of the week (0 - 6) (Sunday=0, Monday=1, ..., Saturday=6)
+| | | +------ Month (1 - 12)
+| | +-------- Day of the month (1 - 31)
+| +---------- Hour (0 - 23)
++------------ Minute (0 - 59)
+```
+
+*Side note: Use the [crontab calculator](https://crontab.guru/) to quickly figure out the correct timings.*
+
+Then we have special symbols:
+
+- ```*```: The asterisk is a wildcard symbol that represents "every" possible value for that field. So for ```* * * * *```, this means the command runs every minute of every hour, every day, every month, and every day of the week. 
+- ```/```: The slash is used to specify step values or intervals. So ```*/5 * * * *``` would mean "every 5 minutes." 
+- ```,```: The comma allows us to specify multiple values in a single field. So ```0 8,12,16 * * *``` would mean the command runs at 8AM, 12PM, and 4PM every day.
+- ```-```: The hyphen defines a range of values. So ```0 9-17 * * *``` would run a command every hour between 9AM to 5PM.
+- ```?```: The question mark is used in the ```day of the month``` and ```day of the week``` field to mean "no specific value." So ```0 12 10 * ?``` runs a command at 12PM on the 10th of every month, regardless of what day of the week it is. 
+
+That's a lot of information at once, so we'll run through our more sophisticated scheduled task.
+
+Let's say we want to automatically perform a backup of our home directory:
+
+- We want to perform this at 6AM every day. 
+- We want to put that backup in the ```var``` backups folder.
+
+How would we schedule this? 
+
+First, we'll want to make a directory inside of the ```var``` folder to store the backups. This folder requires ```sudo``` privileges to access. 
+
+So we'll want to first switch to the root user. 
+
+<img width="523" alt="9  sudo su command" src="https://github.com/user-attachments/assets/0e2f1e5b-41a7-41e8-9745-046868941f5e" loading="lazy"/>
+
+Once we do that, we'll want to make a directory inside of ```/var/backups/```:
+
+```
+mkdir /var/backups/coltonHomeBackups
+```
+
+<img width="863" alt="10  mkdir for home backups" src="https://github.com/user-attachments/assets/44236d06-779d-4aa0-9752-0cf797081bed" loading="lazy"/>
+
+Now the directory exists. 
+
+Let's open up ```crontab``` and schedule the task.
+
+We want to perform this at 6AM every day. So here's what each entry looks like:
+
+- First Entry: The minute field determines the exact minute of the hour when the task should run. It'll range from 0 to 59. In our case, setting it to ```0``` means the task will run at the start of the hour.
+- Second Entry: The hour field determines the exact hour of the day when the task should run. It'll range from 0 to 23. In our case, setting it to ```6``` means the task will run at 6AM.
+- Third Entry: This field specifies which day of the month the task should run. Since we want it to run every day of the month, we'll use the asterisk ```*```.
+- Fourth Entry: This field specifies which months the task should run. Since we want it to run every month, we'll use the asterisk ```*```.
+- Fifth Entry: This field specifies which days of the week the task should run. Since we want it to run every day of the week, we'll use the asterisk ```*```.
+
+<img width="631" alt="11  crontab cron expressions" src="https://github.com/user-attachments/assets/15f83e13-3712-4e61-9c4b-e710ddcb5f40" loading="lazy"/>
+
+Now we need to add a command. 
+
+We want to copy all files and directories from our home directory. Then we want to put it into a new file. So we can use the ```cp``` command for that.
+
+Then we'd add the source and destination path.
+
+We'll also add the ```-a``` flag. This ensures that we get a full backup, as it includes all file attributes (such as timestamps, permissions, and ownership). It also recursively copies directories and their contents. 
+
+Here's what the full command will look like:
+
+```
+cp -a /home/Colton/* /var/backups/coltonHomeBackups
+```
+
+<img width="600" alt="12  command for scheduled backup" src="https://github.com/user-attachments/assets/ac0f7865-9bbd-4e8b-8e52-b319fbb03d34" loading="lazy"/>
+
+The ```*``` after ```/home/Colton/``` ensures I'm capturing all files and directories at that source path.
+
+Great. Let's add two more scheduled tasks to illustrate a few concepts. 
+
+First, let's create a scheduled task that does a backup "every minute." We'll use the ```* * * * *``` cron expressions for this. That way, we can view what a backup actually looks like (instead of waiting till 6AM).
+
+I'll create a new directory. Then I'll enter the following command in our ```crontab``` configuration file:
+
+```
+* * * * * cp -a /home/Colton/* /var/backups/coltonHomeBackupsEveryMinute
+``` 
+
+<img width="589" alt="13  scheduled task every minute for backup" src="https://github.com/user-attachments/assets/69f6f4a8-f0af-467f-ae9b-2de037a240cc" loading="lazy"/>
+
+Then I'll create a third scheduled task without the ```-a``` flag, just so we know how important it is to use the "archive" option.
+
+I'll create a new directory and enter the following command in our ```crontab``` configuration file:
+
+```
+* * * * * cp -a /home/Colton/* /var/backups/coltonHomeBackupsWithoutArchiveFlag
+```
+
+<img width="583" alt="14  scheduled task for backup without archive option" src="https://github.com/user-attachments/assets/aab10252-943d-4563-adfd-92040057ecd9" loading="lazy"/>
+
+Great. Save the configuration file and let's wait a few minutes.
+
+After a couple minutes have gone by, let's see if our backups worked. We'll list out the files and directories in our backups scheduled for "every minute."
+
+<img width="888" alt="15  scheduled backups in crontab" src="https://github.com/user-attachments/assets/962e7367-3f1f-4162-9a44-4860477424bf" loading="lazy"/>
+
+As you can see, both backups worked. And the backups without the ```-a``` flag don't back up any of the directories. This is why the ```-a``` flag is so important when doing backups in Linux.
+
+So now we have a full running backup of our home directory so we don't lose our data. 
