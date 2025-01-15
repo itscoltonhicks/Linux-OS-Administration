@@ -1653,7 +1653,7 @@ That wraps up our lab. We can begin to see that, when we become more familiar wi
 
 # Lab #14 : Linux Services with ```Systemctl```
 
-The ```systemctl``` command is used to control and manage Linux services.
+The ```systemctl``` command is used to control and manage Linux services (commonly referred to as daemons).
 
 A service is a special program that runs in the background, independent of direct user interraction. We need the ```systemctl``` command to start, stop, and check these services. It's kind of like a remote control where we can turn services on, off, and check them when needed. 
 
