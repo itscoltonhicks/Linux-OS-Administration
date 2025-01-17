@@ -2226,7 +2226,7 @@ How would we schedule this?
 
 First, we'll want to make a directory inside of the ```var``` folder to store the backups. This folder requires ```sudo``` privileges to access. 
 
-So we'll want to first switch to the root user. 
+So we'll want to first switch to the root user by using ```sudo su```. If we don't specify a user account after ```su```, then it'll default to the root user.
 
 <img width="523" alt="9  sudo su command" src="https://github.com/user-attachments/assets/0e2f1e5b-41a7-41e8-9745-046868941f5e" loading="lazy"/>
 
