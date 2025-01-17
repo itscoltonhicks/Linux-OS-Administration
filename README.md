@@ -2116,7 +2116,7 @@ That concludes our lab on data streams!
 
 # Lab #16: Create Scheduled Tasks with ```Crontab```
 
-Scheduling tasks in Linux automates repetitive actions.
+Scheduled tasks in Linux automates repetitive actions.
 
 The key tool for doing this is ```Cron```, which is a daemon (background service) that runs tasks at specific times. ```Cron``` refers to the Greek word "chronos," indicating its role in time-based job scheduling. And we can use the ```crontab``` command to interact with the configuration file that stores these scheduled tasks. 
 
