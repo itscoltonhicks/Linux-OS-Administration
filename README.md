@@ -2301,3 +2301,167 @@ After a couple minutes have gone by, let's see if our backups worked. We'll list
 As you can see, both backups worked. And the backups without the ```-a``` flag don't back up any of the directories. This is why the ```-a``` flag is so important when doing backups in Linux.
 
 So now we have a full running backup of our home directory so we don't lose our data. 
+
+# Lab #17: Software Administration with Package Managers
+
+Linux handles software management a bit differently than Windows. 
+
+Instead of downloading executable files, Linux downloads "packages" managed by a "package manager." A package is a bundle of software files and code. It includes everything needed to run a piece of software. It's like buying a DIY furniture piece from IKEA. 
+
+Inside the IKEA box, you'll find all the parts, instructions, and tools to assemble the piece of furniture.
+
+Package managers are tools that automate the process of finding, downloading, installing, and removing software packages. 
+
+There are multiple package managers out there. But regardless of which one you use, they exist to make sure everything in the package is installed correctly and works as expected. It's like asking a knowledgeable IKEA clerk which furniture set best fits your needs and where to find it. 
+
+Similar to a helpful clerk, the package manager helps us find the right packages, checks that we've got all the required dependencies, and makes sure we don't install incompatible or unnecessary files. 
+
+At this point, we have to wonder where the package manager is grabbing packages from.
+
+And this is what repositories are. They're servers or databases maintained by the Linux community and developers. They keep the software packages safe, up-to-date, and compatible with our Linux machine. These repositories store the software packages and make them available for download.
+
+Similarly, in order to get IKEA furniture to your local warehouse, they need to request it from a distribution center. This distribution center is where employees manage and oversee inventory.
+
+In our lab, we'll use the ```apt``` package manager.
+
+This stands for "advanced package tool." And it's a command line interface for managing software packages.
+
+<img width="795" alt="1  apt man pages" src="https://github.com/user-attachments/assets/ef1e4eef-59b5-4749-8217-16e337f78517" loading="lazy"/>
+
+Keep in mind that software management is an administrative task. 
+
+And administrative tasks typically requires us to use ```sudo``` permissions. 
+
+<img width="688" alt="2  apt update without sudo" src="https://github.com/user-attachments/assets/5fb10ba6-cfb2-4a0a-80c8-9f1dd21bbdf0" loading="lazy"/>
+
+That being said, let's talk about ```apt update`` as a command. 
+
+It's a good one to start with. When we run it with ```sudo```, we'll see a list of the latest software package versions. ```apt``` is fetching this information from the repositories. 
+
+<img width="675" alt="3  sudo apt update" src="https://github.com/user-attachments/assets/ca6c213a-c3ae-4dab-adc3-d621ccd7de62" loading="lazy"/>
+
+In the example above, here's a breakdown of the following line: ```Get:2 http://azure.archive.ubuntu.com/ubuntu focal-updates InRelease [128 kB]```:
+
+- ```Get:2```: This indicates that this is the secon thing our system is fetching.
+- ```http://azure.archive.ubuntu.com/ubuntu```: This is the website where the update is coming from. It's the repository or server that stores the package.
+- ```focal-updates```: This is the name of the specific update. This refers to a section in the repository that contains updated software packages. 
+- ```InRelease```: This tells us that the updates are being released now and are ready to be installed. Generally speaking, this column indicates the nature or status of the update being fetched.
+- ```[128 kB]```: This shows the size of the update in kilobytes.
+
+This is an important command because it keeps us informed about the latest software packages available for us to install or update. It's like asking the IKEA clerk for the latest catalogs of available items.
+
+Once the command is completed, we can run ```apt list --upgradable``` to see a list of upgradable software packages. 
+
+<img width="875" alt="4  apt list --upgradable" src="https://github.com/user-attachments/assets/bceea161-9497-48a5-a4b6-6103393f4c57" loading="lazy"/>
+
+We'll see a list of all the specific installed packages on our system that have newer versions available.
+
+This is like highlighting items inside the IKEA catalogs that you already own. Once you show the clerk, they'll give you a list of all the newest models available for those specific items you already have at home.
+
+Since we're just searching for software packages, we don't need to use ```sudo```. 
+
+Next let's say we want to search for a specific software package available, like ```zim```. ```zim``` is a graphical text editor based on wiki technologies.
+
+We'd use the following command to search for it:
+
+```
+apt search zim
+```
+
+We'll see a list of software packages that match this search request, where we can find the specific package associated with ```zim```.
+
+<img width="550" alt="5  apt search for zim" src="https://github.com/user-attachments/assets/cc60d8f1-4aa5-4b50-a92f-5c310eb4e535" loading="lazy"/>
+
+This is like asking the IKEA clerk for more information about a specific type of furniture that you like. They'll flip through the catalog with you, pointing out all the relevant furniture pieces that match your inquiry. 
+
+The ```apt search``` command is useful for quickly locating a specific software package we want.
+
+Now let's say we want to do a full upgrade of the system.
+
+This means we'd upgrade all of our existing software to the latest versions. This is everything we saw in the ```apt list --upgradable``` command.
+
+We'd just run the following command:
+
+```
+sudo apt upgrade
+```
+
+We'll see a large amount of requests going out to the centralized repository links and retrieving all the latest packages. 
+
+<img width="795" alt="6  sudo apt upgrade" src="https://github.com/user-attachments/assets/e8d78951-a688-4370-876c-9f345157c9f3" loading="lazy"/>
+
+Once everything is fetched, we'll see everything get extracted (similar to uncompressing a zipped file).
+
+At that point, ```apt``` uses a local database to check the versions and metadata of the installed packages.
+
+Then the files will get unpacked from the packages and put into various folders on disk.
+
+<img width="695" alt="7  sudo apt upgrade progress" src="https://github.com/user-attachments/assets/2acc3b3a-f5a6-4189-bc96-1e13780bcd77" loading="lazy"/>
+
+Depending on the system you're using, a full upgrade could take a very long time.
+
+This is like deciding to replace all your old IKEA furniture with the upgraded models that the store clerk told you about. If you have a lot of old furniture, this process may take awhile.
+
+**An important side note:** When we're deploying our own custom Linux machine, it's a good idea to update and upgrade the software packages once it's initialized.
+
+It's a good habit. A common command to do this all at once is:
+
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+<img width="690" alt="8  apt update and upgrade at once" src="https://github.com/user-attachments/assets/adbd304c-d185-4909-b20e-5cff02fe1cbf" loading="lazy"/>
+
+Moving on.
+
+So how does our package manager know where to retrieve software packages from?
+
+We can find this information in the ```/etc/apt/sources.list``` file. And we can use the following ```apt``` command to open the file in a text editor:
+
+```
+sudo apt edit-sources
+```
+
+<img width="795" alt="9  edit apt sources" src="https://github.com/user-attachments/assets/ff844682-80fa-42b1-9092-e95f11fade28" loading="lazy"/>
+
+We'll see URLs listed throughout the file. 
+
+These are the URLs that point to the repositories where the package manager retrieves software packages from. It's not generally recommended to modify these repository links, as this can cause broken dependencies, security vulnerabilities, and issues with package updates and installations. It'd be like using an unreliable distribution center to ship IKEA furniture to your local warehouse. There could be issues with quality or the wrong items being sent.
+
+Let's exit the file.
+
+Next we'll install some software using our package manager. 
+
+We'll do this with the ```zim``` tool mentioned earlier. We know it exists because we used the ```apt search``` command on it earlier.
+
+Since we confirmed it's available for installation, we can run ```apt install```:
+
+```
+sudo apt install zim
+```
+
+<img width="900" alt="10  sudo apt install zim" src="https://github.com/user-attachments/assets/cd95a3f7-23a1-4aea-9da1-807005f90964" loading="lazy"/>
+
+The package manager will reach out to the proper repository and install it on our system.
+
+This is like finding a piece of IKEA furniture you want to add to your home. So you ask the clerk to help you locate it, purchase it, then set it up at home.
+
+We can confirm it works by opening up a new terminal and running ```zim```.
+
+<img width="850" alt="11  open zim" src="https://github.com/user-attachments/assets/540d80ec-b0d3-4c9a-80b9-e4ecae3d8b04" loading="lazy"/>
+
+The new text editor will pop up, which allows us to enter more feature-rich text.
+
+But we don't actually need ```zim``` on our system. So let's uninstall and delete it.
+
+There are two commands to do this:
+- ```sudo apt remove zim```: This removes the ```zim``` software package data. But it leaves behind the user configuration files in case we want to reinstall the package later. This is like deciding to return a piece of IKEA furniture—but you keep the assembly instructions, in case you change your mind later and buy it again.
+- ```sudo apt purge zim```: This completely removes the ```zim``` package from our system—the software package data, and the user configuration files. This is like deciding to get rid of a piece of IKEA furniture and all related items, leaving no trace behind. 
+
+We want to purge our system of ```zim```.
+
+So let's do that now.
+
+<img width="900" alt="12  sudo apt purge zim" src="https://github.com/user-attachments/assets/1d12ca35-30c3-4dac-9ab9-0acd3e9b25b0" loading="lazy"/>
+
+Now it's completely removed from our Linux machine.
