@@ -36,7 +36,7 @@
 
 - [Lab #16: Create Scheduled Tasks with ```Crontab```](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-16-create-scheduled-tasks-with-crontab)
 
-- [Software Administration with Package Managers](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-17-software-administration-with-package-managers)
+- [Lab #17: Software Administration with Package Managers](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-17-software-administration-with-package-managers)
 # Introduction
 
 Cybersecurity is a subset of IT.
