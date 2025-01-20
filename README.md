@@ -2604,3 +2604,156 @@ As a summary, here are the commands and keys we've learned so far
 <img width="534" alt="16  lesson 1 summary" src="https://github.com/user-attachments/assets/0d523e85-df58-4697-b923-13c1766e6e6b" loading="lazy"/>
 
 Now we'll use what we learned to create more sophisticated tasks and shell scripts.
+
+# Lab #19: Shell Scripting and Variables Using ```Vim```
+
+We've learned a lot of different commands up to this point—now, what if we wanted to automate them? 
+
+This is the power of shell scripting. Instead of typing commands one by one, we can bundle them into a file and run them all at once. Variables make scripts even more useful. They're like containers, holding data we can reuse throughout our scripts.
+
+In this lab, we'll use ```vim``` to create different scripts for our Linux machine.
+
+Let's start by docking two terminals side-by-side.
+
+<img width="925" alt="1  Docked terminals" src="https://github.com/user-attachments/assets/29e9955f-ec7e-40ae-8fe4-fb4e0977da4b" loading="lazy"/>
+
+In the left terminal, we'll open up ```vim``` and start creating our first script named ```simpleScript```.
+
+So our Linux machine needs clear instructions on how to process files. And in this case, we want it to execute this file as a script. So we'll need to make this clear at the very top (header) of a script.
+
+This is important because the operating system reads the first line line before anything else.
+
+To make sure Linux knows it's a script, we'll use a shebang (```#!```). 
+
+These two characters tell the operating system that the file is a script. Then we'll specify that the script should use the Bash shell interpreter by appending ```/bin/bash``` to the shebang. 
+
+We're basically telling our Linux machine, "When you run this file, make sure to run it as a script inside of the bash shell."
+
+<img width="925" alt="2  shebang bin bash" src="https://github.com/user-attachments/assets/5074b19c-2180-46d3-b28e-a7076f3225db" loading="lazy"/>
+
+Now we can start writing commands.
+
+Let's start with a simple ```echo``` command with some text. Save the file by going into normal mode (```<ESC>```). Then enter ```:w!``` followed by ```<ENTER>``` to save the file.
+
+The ```w``` means to "write" or save the file.
+
+Once it's saved, we'll be able to see it on our terminal to the right.
+
+<img width="925" alt="3  save first rendition of simple script" src="https://github.com/user-attachments/assets/7272dc2d-ab54-4ddf-9f0d-9b91d3de55b3" loading="lazy"/>
+
+Now we need execute (```x```) permissions to run the script. 
+
+But notice how we don't currently have that ability at the moment.
+
+<img width="925" alt="4  Simple script permissions" src="https://github.com/user-attachments/assets/15ba374f-28bd-4113-9cb2-418a4ec5a7c8" loading="lazy"/>
+
+We'll need to change the file mode bits to modify permissions. We can do this in a couple ways:
+
+- We can run ```chmod 700``` to make sure the owner (me) has full permissions.
+- Or we can run ```chmod +x```. This gives every access tier executable permissions.
+
+Let's use the latter, as this script doesn't require tight permissions.
+
+<img width="925" alt="5  change file mode bits for simple script" src="https://github.com/user-attachments/assets/ee828bef-3dd3-4a81-9548-e02d2af550b4" loading="lazy"/>
+
+Now everyone has executable permissions. Also notice how the file is colored green, indicating it's available as an executable file. 
+
+Next we can run the script.
+
+All we need to do is reference the file path. since the script is in our current directory, we'll prefix the file name with ```./```.
+
+<img width="925" alt="6  execute simple script" src="https://github.com/user-attachments/assets/b714d0ba-5ca3-401b-b17f-139cc7f32005" loading="lazy"/>
+
+Nice. We executed our first script.
+
+We can also update our script on the fly. Let's append text to our script, save it, and run it again.
+
+<img width="925" alt="7  appending new text to the script" src="https://github.com/user-attachments/assets/d8d45093-8c40-4daf-a5b9-182913c5271a" loading="lazy"/>
+
+We'll see our appended text once we run the script.
+
+Now we'll create a new script. Delete the ```echo``` commands by entering the ```dd``` keys on each line. 
+
+The ```dd``` key removes a whole line at once.
+
+Now let's create a new script that'll quickly provide a user with important contextual information about their current session. We'll use the ```whoami```, ```date```, and ```pwd``` command. 
+
+And we'll also add an introductory statement with ```echo```. Save it.
+
+<img width="925" alt="8  changing our simple script" src="https://github.com/user-attachments/assets/4e931936-fb5d-4382-9a65-f791f22feba5" loading="lazy"/>
+
+Running the script will display all this information in the terminal.
+
+Next let's create a script that has user interactivity. Exit the current ```vim``` session and create a new one with the ```.sh``` extension. 
+
+This provides us with a visual cue that the file is a shell script.
+
+The ```.sh``` extension 
+
+<img width="925" alt="9   sh extension for new script" src="https://github.com/user-attachments/assets/e18a4073-ea8a-4546-937d-bd74f5bbf151" loading="lazy"/>
+
+The ```.sh``` extension also impacts the ```vim``` session. 
+
+It'll automatically highlight syntax within the script. For instance, once we add ```#!/bin/bash``` at the top, the whole line will get highlighted.
+
+<img width="925" alt="10  syntax highlighting" src="https://github.com/user-attachments/assets/af0389b4-5827-4e26-8630-57914b80b132" loading="lazy"/>
+
+Now let's write the new command:
+
+- We'll use an ```echo``` statement to greet the user. 
+
+- Then we'll use the ```read``` command. ```read``` is used to capture input provided by the user on the terminal. It assigns this input to a variable, which can be used throughout the script.
+
+- We'll close the script with an ```echo``` statement that acknowledges the user by their inputted name. Then wishes them farewell.
+
+Here's what the command will look like:
+
+```
+echo "Hello there! What is your name?"
+read NAME
+echo "Nice to meet you $NAME! Have a great day. May your commands be swift and your scripts run flawlessly!"
+```
+
+The ```$``` prefixes ```NAME``` on the third line to call the variable (and the value within it). 
+
+<img width="925" alt="11  input new script that greets user" src="https://github.com/user-attachments/assets/3bec1a96-0142-471e-981f-ed8e2664d33c" loading="lazy"/>
+
+Now on the terminal to the right, we'll give everyone executable permissions to the new file.
+
+Then we'll run the script. 
+
+We'll be prompted for our name after the first statement. And once I provide input on the second line, the script will output the closing statement.
+
+<img width="925" alt="12  run greet user script" src="https://github.com/user-attachments/assets/192ebfe4-eca4-437c-88eb-7be0547bb06b" loading="lazy"/>
+
+Great. We've covered how to create and run scripts.
+
+To wrap up this lab, we'll talk a bit more about variables. 
+
+There are "declared" variables. This is what we did for our script. We explicitly defined and assigned a value within a script. 
+
+And this gives us more flexibility when developing a script.
+
+But there are also "environmental" variables.
+
+These variables live inside of the operating system at all times. And we can call the value of these variables using the ```echo``` command and prefixing the variable with a ```$```.
+
+For instance, we can call the environmental variable that holds the path of the current user's default shell.
+
+```
+echo $SHELL
+```
+
+<img width="471" alt="13  shell environmental variable" src="https://github.com/user-attachments/assets/a97f9afe-6d93-4fb4-87dc-39fce2acb974" loading="lazy"/>
+
+Environmental variables mostly revolve around the current user account. 
+
+To illustrate the point further, we can call the environmental variable that holds the path of the current user's home directory.
+
+```
+echo $HOME
+```
+
+<img width="472" alt="14  home environmental variable" src="https://github.com/user-attachments/assets/c3cd8d35-0d7a-4069-bd29-1043a9c3729e" loading="lazy"/>
+
+A basic understanding of variables will empower us to create more sophisticated and complex shell scripts.
