@@ -39,6 +39,8 @@
 - [Lab #17: Software Administration with Package Managers](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-17-software-administration-with-package-managers)
 
 - [Lab #18: Advanced Text Editing with ```Vim```](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-18-advanced-text-editing-with-vim)
+
+- [Lab #19: Shell Scripting and Variables Using ```Vim```](https://github.com/itscoltonhicks/Linux-OS-Administration/blob/main/README.md#lab-19-shell-scripting-and-variables-using-vim)
 # Introduction
 
 Cybersecurity is a subset of IT.
