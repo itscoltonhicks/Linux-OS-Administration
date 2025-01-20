@@ -2467,3 +2467,138 @@ So let's do that now.
 <img width="900" alt="12  sudo apt purge zim" src="https://github.com/user-attachments/assets/1d12ca35-30c3-4dac-9ab9-0acd3e9b25b0" loading="lazy"/>
 
 Now it's completely removed from our Linux machine.
+
+# Lab #18: Advanced Text Editing with ```Vim```
+
+Linux rewards speed and precision—the faster we can manipulate text, the better we'll work.
+
+And this is why learning a powerful text editor like ```vim``` is a game-changer. ```Vim``` stands for "Vi Improved." It's a more advanced text editor based on the original "Vi editor." While ```nano``` is great for simple tasks, ```vim``` has more robust features to handle complex ones.
+
+Learning ```vim``` will make us more efficient in Linux.
+
+<img width="507" alt="1  whatis vim" src="https://github.com/user-attachments/assets/84d093c3-5104-4676-bb4b-1ed1f9539971" loading="lazy"/>
+
+In this lab, we'll run through the basics of using ```vim```. This will set the stage for future labs where we'll create bash scripts and perform more sophisticated tasks.
+
+```Vim``` will feel intimidating at first because it operates differently from text editors like ```nano```.
+
+For that reason, we can run the ```vimtutor``` command to walk through the basics.
+
+<img width="517" alt="2  vimtutor" src="https://github.com/user-attachments/assets/43c7c2d8-726f-4bd4-b32f-b2b12ad43d7c" loading="lazy"/>
+
+```vimtutor``` is a tutor built into the terminal
+
+It'll teach us the basics of using ```vim``` since it has a steep learning curve. We'll just go through the first lesson, as that'll give us a good foundation to build off of in future labs.
+
+To start, we need to navigate around. 
+
+And we can do this with ```h```, ```j```, ```k```, and ```l``` keys:
+
+- ```h``` moves the cursor left.
+- ```l``` moves the cursor right.
+- ```j``` moves the cursor down.
+- ```k``` moves the cursor up.
+
+<img width="550" alt="3  moving the cursor in vim" src="https://github.com/user-attachments/assets/cfbc1b4a-2d05-4946-9683-6a670637720b" loading="lazy"/>
+
+That's simple enough.
+
+Next we'll want to learn how to exit ```vim```.
+
+It's important to know that the text editor has different modes. And in order to exit the editor, we'll want to make sure we're in "normal" mode. This is the default mode used for navigating and editing text.
+
+And this is also the mode we use when exiting ```vim```.
+
+So to make sure we're in "normal" mode, we want to enter the ```<ESC>``` key.
+
+Then we can type the following command to actually exit it:
+
+```
+:q!
+```
+
+The ```:``` enters command-line mode. The ```q``` command is used to "quit" ```vim```. And the ```!``` forces the quit command.
+
+<img width="550" alt="4  exiting vim" src="https://github.com/user-attachments/assets/1747ef2b-6bbb-42ee-97ae-907ad0e69cfe" loading="lazy"/>
+
+After hitting the ```<ENTER>``` key, we'll exit the editor.
+
+Head back to ```vimtutor``` and continue the lesson.
+
+Moving down to lesson 1.3, let's delete some text. We can delete a character by using the ```x``` key.
+
+<img width="539" alt="5  text deletion in vim" src="https://github.com/user-attachments/assets/4ca650d6-b20a-4b82-bbb7-157616b1ec2c" loading="lazy"/>
+
+We'll see a line marked with ```--->``` where we can practice this. 
+
+Move the cursor over the character we'd like to delete and enter ```x```.
+
+<img width="537" alt="6  text deletion in practice" src="https://github.com/user-attachments/assets/4055acb4-7235-476f-a3f3-38ef6722b4f5" loading="lazy"/>
+
+Next let's go to lesson 1.4.
+
+Here we'll insert text. And we'll do this by using the ```i``` key to enter "insert mode." If you move the cursor on top of a character, we'll be able to insert text BEFORE it.
+
+But we'll have to use the ```<ESC>``` key to go back into normal mode, move our cursor, and insert text elsewhere.
+
+<img width="545" alt="7  text insertion in vim" src="https://github.com/user-attachments/assets/537546ad-96b8-4a14-925c-d1ddd3f88e7e" loading="lazy"/>
+
+We can practice on the line near the bottom.
+
+<img width="538" alt="8  text insertion in practice" src="https://github.com/user-attachments/assets/0ea63c74-8e1b-4366-bc74-677e3e43482f" loading="lazy"/>
+
+Next we'll look at less 1.5.
+
+This will teach us how to append text to lines. We can use the uppercase ```A``` key to append text to the end of a line, no matter where the cursor is at on that line.
+
+<img width="528" alt="9  text appending in vim" src="https://github.com/user-attachments/assets/3d889f62-9441-43b5-862a-62d1abb449b2" loading="lazy"/>
+
+We can do this with the first practice line given to us.
+
+<img width="530" alt="10  text appending uppercase A" src="https://github.com/user-attachments/assets/86e0da07-a3df-4241-a2fb-9b7a2e61a31c" loading="lazy"/>
+
+Just like the previous ```i``` key used, we'll need to use ```<ESC>``` to go back into normal mode so we can move our cursor to the next lines. We could also use the arrow keys to move around while in insert mode.
+
+Let's practice some more. But this time, we can use the lowercase ```a``` to append text after the cursor. This is something covered in a later lesson. But I find it helpful to learn in the beginning of using ```vim```. 
+
+Use the ```a``` key to add text to the third line.
+
+<img width="550" alt="11  text appending lowercase a" src="https://github.com/user-attachments/assets/7fd52eee-6ac9-4880-9c3a-e1a5704188fc" loading="lazy"/>
+
+Done. Next we'll move to lesson 1.6.
+
+This is where we learn how to save a file and exit.
+
+<img width="535" alt="12  editing a file in vim" src="https://github.com/user-attachments/assets/c0a26eb8-28ca-44d8-b629-1e457750619d" loading="lazy"/>
+
+We basically just make sure we're in normal mode.
+
+Then we type in the command:
+
+```
+:wq <ENTER>
+```
+
+This ```w``` command is used to "write" text to the file, effectively saving it to our system.
+
+We shouldn't save the ```vimtutor``` file.
+
+So let's exit ```vimtutor``` and create a new file using ```vim``` in the terminal.
+
+<img width="518" alt="13  create new textfile with vim" src="https://github.com/user-attachments/assets/ace0fd49-7dc6-4e51-b82f-8afd24a39f3c" loading="lazy"/>
+
+Once we add some text, we can use the ```:wq``` command to save and exit vim.
+
+<img width="525" alt="14  add text to file then save and exit vim" src="https://github.com/user-attachments/assets/a350af33-0a67-40a4-8d29-d9097255b010" loading="lazy"/>
+
+Hit ```<ENTER>```. Now we'll be able to see the new file in our home directory, as well as the text inside it.
+
+<img width="874" alt="15  view new file that was edited in vim" src="https://github.com/user-attachments/assets/d0cb789c-0495-494c-8c84-52330fd31793" loading="lazy"/>
+
+And that covers the basics of ```vim```.
+
+As a summary, here are the commands and keys we've learned so far
+
+<img width="534" alt="16  lesson 1 summary" src="https://github.com/user-attachments/assets/0d523e85-df58-4697-b923-13c1766e6e6b" loading="lazy"/>
+
+Now we'll use what we learned to create more sophisticated tasks and shell scripts.
